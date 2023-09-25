@@ -12,7 +12,10 @@
         <h2> Ejemplo 1 - Tema 2</h2>
     </center>
     <h4>
-        <?php echo "Hola Mundo"; ?>
+        <?php
+            echo "Hola Mundo ";
+            echo "Juan M";
+        ?>
     </h4>
 </body>
 
