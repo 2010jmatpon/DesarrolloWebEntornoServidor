@@ -20,6 +20,12 @@
             <th>Especialidad</th>
         </tr>
         <tr>
+            <!-- No se hace así -->
+            <!-- <td><?php echo $usuario?></td>
+            <td><?php echo $categoria?></td>
+            <td><?php echo $especialidad?></td> -->
+            
+            <!-- Se hace así -->
             <td><?= $usuario?></td>
             <td><?= $categoria?></td>
             <td><?= $especialidad?></td>
