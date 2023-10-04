@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Proyecto 2.1 - Calculadora Básica</title>
+    <title>Proyecto 2.2 - Lanzamiento Proyectiles</title>
 
     <!-- css bootstrap 532 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
