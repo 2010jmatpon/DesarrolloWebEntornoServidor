@@ -17,27 +17,19 @@
             <span class="fs-6">Plantilla Bootstrap</span>
         </header>
         <!-- menu -->
-
+        <legend>Tablas de Multiplicar</legend>
         <table class="table table-primary">
             <tbody>
-                <?php
-                for ($i = 1; $i <= 10; $i++) {
-                    echo "<tr>";
-                    for ($j = 1; $j <= 10; $j++) {
-                        if ($i == 1 && $j == 1) {
-                            echo "<td></td>";
-                        } else if ($i == 1) {
-                            echo "<th>$j</th>";
-                        } else if ($j == 1) {
-                            echo "<th>$i</th>";
-                        } else {
-                            echo "<td>" . ($i * $j) . "</td>";
-                        }
-                    }
-                    echo "</tr>";
-                }
-                echo "</table>";
-                ?>
+                <?php for ($i = 1; $i <= 10; $i++) :?>
+                    <tr>
+                    <?php for ($j = 1; $j <= 10; $j++) :?>
+                        <td> <?=($i * $j)?></td>
+                    <?php endfor; ?>
+                    </tr>
+                <?php endfor; ?>
+
+            </table>
+                
 
 
             </tbody>
