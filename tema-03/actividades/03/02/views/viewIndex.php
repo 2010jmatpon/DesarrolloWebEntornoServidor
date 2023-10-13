@@ -27,11 +27,6 @@
                     <?php endfor; ?>
                     </tr>
                 <?php endfor; ?>
-
-            </table>
-                
-
-
             </tbody>
         </table>
 
