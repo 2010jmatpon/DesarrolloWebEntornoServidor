@@ -13,36 +13,80 @@
 
         <!-- cabecera documento -->
         <header class="pb-3 mb-4 border-bottom">
-            <i class="bi bi-calculator"></i>
-            <span class="fs-6">Calculadora Conversor Decimal</span>
+            <i class="bi bi-bootstrap-reboot"></i>
+            <span class="fs-6">Plantilla Bootstrap</span>
         </header>
+        <!-- menu -->
+        <menu>
+            <?php if ($perfil == 1): ?>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Nuevo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Eliminar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Actualizar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Consultar</a>
+                    </li>
+                </ul>
 
-        <legend>Resultados</legend>
-        <table class="table">
+            <?php elseif ($perfil == 2): ?>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Nuevo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Actualizar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Consultar</a>
+                    </li>
+                </ul>
+            <?php else: ?>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Consultar</a>
+                    </li>
+                </ul>
+            <?php endif; ?>
+        </menu>
+
+        <table class="table table-primary">
+            <thead>
+                <tr>
+                    <th scope="col">Campo</th>
+                    <th scope="col">Valor</th>
+                </tr>
+            </thead>
             <tbody>
-
                 <tr>
+                    <td scope="row">Usuario</td>
                     <td>
-                        <b>
-                            DECIMAL
-                        </b>
-                    </td>
-                    <td>
-                        <?= $Decimal ?>
+                        <?= $usuario ?>
                     </td>
                 </tr>
-
                 <tr>
+                    <td scope="row">Email</td>
                     <td>
-                        <b>
-                            <?= $operacion ?>
-                        </b>
-                    </td>
-                    <td>
-                        <?= $resultado ?>
+                        <?= $email ?>
                     </td>
                 </tr>
-
+                <tr>
+                    <td scope="row">Contraseña</td>
+                    <td>
+                        <?= $password ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row">Perfil</td>
+                    <td>
+                        <?= $perfil ?>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <!-- botones de acción -->

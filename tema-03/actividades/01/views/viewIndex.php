@@ -13,26 +13,12 @@
 
         <!-- cabecera documento -->
         <header class="pb-3 mb-4 border-bottom">
-            <i class="bi bi-calculator"></i>
-            <span class="fs-6">Calculadora Conversor Decimal</span>
+            <i class="bi bi-bootstrap-reboot"></i>
+            <span class="fs-6">Plantilla Bootstrap</span>
         </header>
         <!-- menu -->
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Active</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-            </li>
-        </ul>
 
-        <legend>Formulario Conversor</legend>
+        <legend>Regístrate</legend>
         <form method="POST" action="acceso.php">
 
             <!-- usuario -->
@@ -49,14 +35,14 @@
 
             <!-- password -->
             <div class="mb-3">
-                <label class="form-label" name="password">Password</label>
-                <input type="password" class="form-control">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" name="password">
             </div>
 
             <!-- password de confirmación -->
             <div class="mb-3">
-                <label class="form-label" name="passwordConfirm">Password de Confirmacion</label>
-                <input type="password" class="form-control">
+                <label class="form-label">Password de Confirmacion</label>
+                <input type="password" class="form-control" name="passwordConfirm">
             </div>
 
             <!-- perfiles -->
@@ -67,8 +53,6 @@
                 <option value="3">Usuario</option>
             </select>
 
-            <br>
-            <br>
             <br>
 
             <!-- botones de acción -->

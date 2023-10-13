@@ -11,6 +11,6 @@
     # No hay modelo
     include "models/modelAcceso.php";
     # Vista
-    include "views/viewIndex.php";
+    include "views/viewResultado.php";
 
 ?>
