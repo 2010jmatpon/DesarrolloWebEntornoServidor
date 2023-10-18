@@ -31,6 +31,8 @@
           <th>Autor</th>
           <th>Genero</th>
           <th>Precio</th>
+          <th>Acciones</th>
+
         </tr>
       </thead>
       <!-- Mostramos el cuerpo de la tabla -->
@@ -43,9 +45,13 @@
                 <?= $campo ?>
               </td>
             <?php endforeach; ?>
+            <td>
+              <a href="eliminar.php?id=<?=$libro['id'] ?>">
+              <i class="bi bi-trash3-fill"></i></a>
+            </td>
 
-            <!-- <td><?=$libro['id'] ?></td>
-            <td><?=$libro['titulo'] ?></td> -->
+            <!-- <td><?= $libro['id'] ?></td>
+            <td><?= $libro['titulo'] ?></td> -->
 
 
           </tr>
