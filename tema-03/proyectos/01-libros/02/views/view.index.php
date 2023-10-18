@@ -15,8 +15,11 @@
       <i class="bi bi-book-half"></i>
       <span class="fs-4">Proyecto 3.1 - Gestión de libros</span>
     </header>
-
     <legend>Tabla Libros</legend>
+    
+    <!-- Menu principal -->
+    <?php include 'views/partials/menu_prin.php' ?>
+
     <table class="table">
       <thead>
         <!-- Encabezado Tabla -->
@@ -46,8 +49,8 @@
               </td>
             <?php endforeach; ?>
             <td>
-              <a href="eliminar.php?id=<?=$libro['id'] ?>">
-              <i class="bi bi-trash3-fill"></i></a>
+              <a href="eliminar.php?id=<?= $libro['id'] ?>">
+                <i class="bi bi-trash3-fill"></i></a>
             </td>
 
             <!-- <td><?= $libro['id'] ?></td>
