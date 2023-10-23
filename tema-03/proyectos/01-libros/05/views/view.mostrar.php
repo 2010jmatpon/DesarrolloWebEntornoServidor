@@ -4,10 +4,11 @@
 <head>
     <?php include 'views/plantilla/head.html' ?>
     <title>Proyecto 3.1 - Gestión de libros</title>
-
+    
 </head>
 
 <body>
+    
     <!-- Capa principal -->
     <div class="container">
         <!-- cabecera documento -->
@@ -17,7 +18,7 @@
         </header>
         <legend>Tabla Nuevo Libro</legend>
 
-        <form action="mostrar.php?id=<?=$id?>" method="POST">
+        <form action="mostrar.php">
         <div class="mb-3">
                 <label for="titulo" class="form-label">Id</label>
                 <input type="text" class="form-control" name="id" value="<?=$libro['id'] ?>" readonly>

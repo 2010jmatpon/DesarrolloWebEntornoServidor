@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <!--  -->
+    
     <!-- Capa principal -->
     <div class="container">
         <!-- cabecera documento -->
