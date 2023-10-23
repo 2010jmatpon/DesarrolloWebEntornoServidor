@@ -4,10 +4,11 @@
 <head>
     <?php include 'views/plantilla/head.html' ?>
     <title>Proyecto 3.1 - Gestión de libros</title>
-
+    
 </head>
 
 <body>
+    <!--  -->
     <!-- Capa principal -->
     <div class="container">
         <!-- cabecera documento -->

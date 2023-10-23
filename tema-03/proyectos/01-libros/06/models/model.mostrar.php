@@ -13,7 +13,7 @@ $id = $_GET['id'];
 
 #obtener el indice del libro
 $indice_mostrar = buscar_en_tabla($libros, 'id', $id);
-
+//
 #creo un array asociativo con los detalles del libro modificado
 if ($indice_mostrar !== 'false') {
     //Obtengo array del libro a editar
