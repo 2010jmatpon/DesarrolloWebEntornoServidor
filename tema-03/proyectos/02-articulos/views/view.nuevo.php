@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-    <?php include 'views/plantilla/head.html' ?>
+    <?php include 'views/layouts/head.html' ?>
     <title>Proyecto 3.1 - Gestión de libros</title>
 
 </head>
@@ -33,6 +33,12 @@
                 <input type="text" class="form-control" name="categoria">
                 <!-- <div class="form-text">Género del libro</div> -->
             </div>
+            <!-- Género -->
+            <div class="mb-3">
+                <label for="genero" class="form-label">Stock</label>
+                <input type="text" class="form-control" name="stock">
+                <!-- <div class="form-text">Género del libro</div> -->
+            </div>
             <!-- Precio -->
             <div class="mb-3">
                 <label for="precio" class="form-label">Precio (€)</label>
@@ -42,19 +48,19 @@
 
 
             <a class="btn btn-secondary" href="index.php" role="button">Cancelar</a>
-            <button type="reset" class="btn btn-danger">Borrar</button>
-            <button type="submit" class="btn btn-primary">Enviar</button>
+            <button type="reset" class="btn btn-danger">Reset</button>
+            <button type="submit" class="btn btn-primary">Añadir</button>
 
         </form>
 
         <!-- pie del documento -->
 
-        <?php include 'views/plantilla/footer.html' ?>
+        <?php include 'views/partials/footer.html' ?>
 
     </div>
 
     <!-- javascript bootstrap 512 -->
-    <?php include 'views/plantilla/javascript.html' ?>
+    <?php include 'views/layouts/javascript.html' ?>
 </body>
 
 </html>
