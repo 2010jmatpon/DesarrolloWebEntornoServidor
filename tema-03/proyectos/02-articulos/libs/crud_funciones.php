@@ -93,4 +93,11 @@ function generar_tabla_categorias()
     ];
     return $categorias;
 }
+
+function nuevo ($tabla, $elemento){
+
+    $tabla[] = $elemento;
+    return $tabla;
+
+}
 ?>
