@@ -1,7 +1,7 @@
 <?php
 /*
 Modelo: model.create.php
-Descripcion: Genera los datos de los libros
+Descripcion: Genera los datos de los articulos
 */
 
 $articulos = generar_tabla();

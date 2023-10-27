@@ -3,7 +3,7 @@
 
 <head>
     <?php include 'views/layouts/head.html' ?>
-    <title>Proyecto 3.1 - Gestión de libros</title>
+    <title>Proyecto 3.2 - Tabla artículos</title>
 
 </head>
 
@@ -20,13 +20,11 @@
                 <label for="titulo" class="form-label">Descripción</label>
                 <input type="text" class="form-control" name="descripcion" value="<?= $articulo['descripcion'] ?>"
                     readonly>
-                <!-- <div class="form-text">Introduzca título libro existente</div> -->
             </div>
             <!-- Modelo -->
             <div class="mb-3">
                 <label for="autor" class="form-label">Modelo</label>
                 <input type="text" class="form-control" name="modelo" value="<?= $articulo['modelo'] ?>" readonly>
-                <!-- <div class="form-text">Introduzca Autor del libro</div> -->
             </div>
             <!-- Categoría -->
             <div class="mb-3">
@@ -37,14 +35,12 @@
             <div class="mb-3">
                 <label for="unidades" class="form-label">Unidades</label>
                 <input type="text" class="form-control" name="unidades" value="<?= $articulo['unidades'] ?>" readonly>
-                <!-- <div class="form-text">Género del libro</div> -->
             </div>
             <!-- Precio -->
             <div class="mb-3">
                 <label for="precio" class="form-label">Precio (€)</label>
                 <input type="number" class="form-control" name="precio" step="0.01" value="<?= $articulo['precio'] ?>"
                     readonly>
-                <!-- <div class="form-text">Introduzca Precio</div> -->
             </div>
 
 

@@ -8,7 +8,7 @@ $indice_eliminar = buscar_en_tabla($articulos, 'id', $id);
 
 //Comparación estricta para distinguir el false del 0
 if ($indice_eliminar !== false) {
-    //Obtengo array del libro a editar
+    //Obtengo array del articulo a editar
     unset ($articulos[$indice_eliminar]);
 
     $articulos=array_values($articulos);

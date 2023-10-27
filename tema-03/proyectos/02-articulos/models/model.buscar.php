@@ -1,14 +1,5 @@
 <?php
-/*
-Modelo: model.create.php
-Descripcion: añade un nuevo libro a la tabla
-METODO POST:
-    -id
-    -titulo
-    -autor
-    -genero
-    -precio
-*/
+
 $articulos = generar_tabla();
 $categorias=generar_tabla_categorias();
 

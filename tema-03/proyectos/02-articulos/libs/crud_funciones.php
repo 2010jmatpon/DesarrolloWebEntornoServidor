@@ -31,7 +31,7 @@ function eliminar ($tabla = [], $id){
    //devuelve array con valores de la columna id
     $lista_id=array_column($tabla,'id');
 
-    //buscar id del libro que deseo eliminar
+    //buscar id del elemento que deseo eliminar
     $elemento = array_search($id, $lista_id, false);
 
     unset($tabla[$elemento]);

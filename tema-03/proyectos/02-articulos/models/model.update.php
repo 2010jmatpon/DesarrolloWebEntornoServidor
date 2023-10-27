@@ -1,8 +1,4 @@
 <?php
-/*
-Modelo: model.create.php
-Descripcion: Genera los datos de los libros
-*/
 
 $articulos = generar_tabla();
 $categorias = generar_tabla_categorias();
