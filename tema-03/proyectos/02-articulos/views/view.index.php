@@ -53,7 +53,7 @@
                             <?= $articulo['unidades'] ?>
                         </td>
                         <td class="text-end">
-                            <?= number_format ($articulo['precio'], 2, ',', '.') ?>€
+                            <?= number_format($articulo['precio'], 2, ',', '.') ?>€
                         </td>
                         <td>
                             <a href="eliminar.php?id=<?= $articulo['id'] ?>" title="Eliminar">
@@ -61,7 +61,7 @@
                             <a href="editar.php?id=<?= $articulo['id'] ?>" title="Editar">
                                 <i class="bi bi-pencil-fill"></i></a>
                             <a href="mostrar.php?id=<?= $articulo['id'] ?>" title="Mostrar">
-                                <i class="bi bi-plus-circle-fill"></i>
+                                <i class="bi bi-eye-fill"></i>
                         </td>
                     </tr>
                 <?php endforeach; ?>

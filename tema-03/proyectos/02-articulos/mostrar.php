@@ -2,8 +2,8 @@
 #Libreria
 include 'libs/crud_funciones.php';
 #Model
-include "models/model.mostrar.php";
+require "models/model.mostrar.php";
 
 #Vista
-include "views/view.mostrar.php";
+require "views/view.mostrar.php";
 ?>

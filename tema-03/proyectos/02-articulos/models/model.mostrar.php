@@ -18,12 +18,12 @@ $id = $_GET['id'];
 $indice_mostrar = buscar_en_tabla($articulos, 'id', $id);
 //
 #creo un array asociativo con los detalles del libro modificado
-if ($indice_mostrar !== 'false') {
+if ($indice_mostrar !== false) {
     //Obtengo array del libro a editar
     $articulo = $articulos[$indice_mostrar];
 
 } else {
-    echo 'ERROR: libro no encontrado';
+    echo 'ERROR: articulo no encontrado';
 }
 
 

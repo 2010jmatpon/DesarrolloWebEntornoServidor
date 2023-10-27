@@ -14,7 +14,7 @@
         <?php include 'views/partials/header.php' ?>
         <legend>Tabla Artículos</legend>
 
-        <form action="create.php" method="POST">
+        <form action="mostrar.php">
             <!-- Descripción -->
             <div class="mb-3">
                 <label for="titulo" class="form-label">Descripción</label>
@@ -31,7 +31,7 @@
             <!-- Categoría -->
             <div class="mb-3">
                 <label for="categoria" class="form-label">Categoría</label>
-                <select type="text" class="form-control" name="categoria" value="<?= $articulo['categoria'] ?>" disabled>
+                <select type="text" class="form-control" name="categoria" value="<?= $categorias[$articulo['categoria']] ?>" readonly>
             </div>
             <!-- Stock -->
             <div class="mb-3">
