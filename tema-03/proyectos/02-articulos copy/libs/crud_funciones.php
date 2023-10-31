@@ -118,4 +118,13 @@ function nuevo ($tabla, $elemento){
     return $tabla;
 
 }
+
+function mostrarCategorias($categorias, $categoriasArticulo){
+    $arrayCategorias = [];
+    foreach ($categoriasArticulo as $indice){
+        $arrayCategorias[] = $categorias[$indice];
+    }
+    assort($arrayCategorias);
+    return $arrayCategorias;
+}
 ?>
