@@ -2,25 +2,18 @@
 
     /*
 
-        Modelo: model.index.php
-        Descripcion: genera en array los datos de los artículos
+        Modelo: model.nuevo.php
+        Descripcion: carga array categorias generar el select dinámico de categorías
 
     */
 
-    setlocale(LC_MONETARY,"es_ES");
-
-    #Cargamos los arrays a partir de los métodos estáticos de la clase
-    #ArrayArticulos
+    # cargamos la tabla
     $categorias = ArrayArticulos::getCategorias();
     $marcas = ArrayArticulos::getMarcas();
 
     #Creamos un objeto de la clase ArrayArticulos
     $articulos = new ArrayArticulos();
     $articulos -> getDatos();
-    
 
-   
-
-    
 
 ?>

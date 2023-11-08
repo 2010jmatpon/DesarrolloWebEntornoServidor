@@ -110,7 +110,7 @@ class ArrayArticulos
             'PC sobremesa - Lenovo Intel® Core™ i3-8100',
             'ideacentre 510S-07|CB',
             1,
-
+            [2, 3],
             50,
             12.95
         );
