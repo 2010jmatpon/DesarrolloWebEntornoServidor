@@ -18,6 +18,8 @@
         <!-- Menu Principal -->
         <?php include 'views/partials/menu_prin.php' ?>
 
+        <!-- Notificacion -->
+        <?php include 'views/partials/notificacion.php'?>
         <!-- Muestra datos de la tabla -->
         <table class="table">
             <!-- Encabezado tabla -->

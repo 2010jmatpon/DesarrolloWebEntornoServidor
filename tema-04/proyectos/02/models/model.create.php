@@ -14,24 +14,37 @@
 
     */
 
-    $articulos = generar_tabla();
-    $categorias = generar_tabla_categorias();
-    $marcas = generar_tabla_marcas();
+    # cargamos la tabla
+    $categorias = ArrayArticulos::getCategorias();
+    $marcas = ArrayArticulos::getMarcas();
 
-    $new_articulo = [
+    #Creamos un objeto de la clase ArrayArticulos
+    $articulos = new ArrayArticulos();
+    $articulos -> getDatos();
 
-        'id' => generar_id($articulos),
-        'descripcion'=>$_POST['descripcion'],
-        'modelo'=>$_POST['modelo'],
-        'marca'=>$_POST['marca'],
-        'categorias'=>$_POST['categorias'], // array de  categorias
-        'unidades'=> $_POST['unidades'],
-        'precio'=> $_POST['precio']
+    $id=$_POST['id'];
+    $descripcion=$_POST['descripcion'];
+    $modelo = $_POST['modelo'];
+    $marca = $_POST['marca'];
+    $categoria = $_POST['categorias'];
+    $unidades = $_POST['unidades'];
+    $precio = $_POST['precio'];
+    
 
-    ];
+    $articulo = new Articulo(
+        $id,
+        $descripcion,
+        $modelo,
+        $marca,
+        $categoria,
+        $unidades,
+        $precio
+        
+    );
 
-    // $articulos = nuevo($articulos, $new_articulo);
 
-    $articulos[] = $new_articulo;
+    $articulos -> create($articulo);
+
+    $notificacion = "Articulo creado con éxito";
 
 ?>

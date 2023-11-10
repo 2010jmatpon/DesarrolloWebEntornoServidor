@@ -56,7 +56,7 @@ class ArrayArticulos
 
     }
 
-    static public  function getCategorias()
+    static public function getCategorias()
     {
         $categorias = [
             'Portátil',
@@ -88,7 +88,7 @@ class ArrayArticulos
         );
 
         #Añadir artículo a la tabla
-        $this -> tabla[] = $articulo;
+        $this->tabla[] = $articulo;
 
         #Articulo2
         $articulo = new Articulo(
@@ -102,7 +102,7 @@ class ArrayArticulos
         );
 
         #Añadir artículo a la tabla
-        $this -> tabla[] = $articulo;
+        $this->tabla[] = $articulo;
 
         #Articulo3
         $articulo = new Articulo(
@@ -116,24 +116,45 @@ class ArrayArticulos
         );
 
         #Añadir artículo a la tabla
-        $this -> tabla[] = $articulo;
+        $this->tabla[] = $articulo;
 
     }
 
-    static public function mostrarCategorias($categorias, $categoriasArticulo) {
+    static public function mostrarCategorias($categorias, $categoriasArticulo)
+    {
         //Podemos declarar este metodo estático porque no modifica ningun atributo de la clase
         $arrayCategorias = [];
-    
-        foreach($categoriasArticulo as $indice) {
-    
+
+        foreach ($categoriasArticulo as $indice) {
+
             $arrayCategorias[] = $categorias[$indice];
-    
+
         }
-    
+
         asort($arrayCategorias);
         return $arrayCategorias;
-    
+
     }
+
+    public function create(Articulo $data)
+    {
+        $this->tabla[] = $data;
+    }
+
+    public function delete($indice)
+    {
+        unset($this->tabla[$indice]);
+        array_values($this->tabla);
+    }
+
+    function buscar_en_tabla($tabla = [], $columna, $valor)
+    {
+
+        $columna_valores = array_column($tabla, $columna);
+        return array_search($valor, $columna_valores, false);
+
+    }
+
 }
 
 ?>
