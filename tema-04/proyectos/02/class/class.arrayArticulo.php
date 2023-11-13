@@ -151,6 +151,10 @@ class ArrayArticulos
         return $this->tabla[$indice]; 
     }
 
+    public function update(Articulo $data, $indice){
+        $this->tabla[$indice] = $data;
+    }
+
 }
 
 ?>
