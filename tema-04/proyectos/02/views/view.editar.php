@@ -2,103 +2,103 @@
 <html lang="es">
 
 <head>
-    <?php include 'views/layouts/head.html' ?>
-    <title>Proyecto 3.1 - Gestión de libros</title>
+
+    <?php include "views/layouts/head.html" ?>
+
 </head>
 
 <body>
     <!-- Capa principal -->
     <div class="container">
-
         <!-- cabecera documento -->
-        <?php include 'views/partials/header.php' ?>
+        <?php include "views/partials/header.php" ?>
 
-        <legend>Formulario Editar Libro</legend>
+        <legend>Formulario Nuevo Articulo</legend>
 
-        <!-- Formulario Editar Libro -->
-        <form action="update.php?indice=<?= $indice_editar ?>" method="POST">
-            <!-- id oculto -->
-            
-                <!-- <label for="titulo" class="form-label">Id</label> -->
-                <input type="hydeen" class="form-control" name="id" value="<?= $articulo['id'] ?>" hidden>
-            
-            <!-- Descripción -->
-            <div class="mb-3">
-                <label for="descripcion" class="form-label">Descripción</label>
-                <input type="text" class="form-control" name="descripcion" value="<?= $articulo['descripcion'] ?>">
+        <form action="update.php?id=<?= $id ?>" method="POST">
+
+        <div class="form-floating mb-3">
+                
+                <input type="number" class="form-control" name="id" value="<?=$articulo->getId()?>" readonly>
+                <label class="form-label">id</label>
             </div>
+            
+            <!-- descripción -->
+            <div class="form-floating mb-3">
+                
+                <input type="text" class="form-control" name="descripcion" value="<?=$articulo->getDescripcion()?>">
+                <label class="form-label">Descripción</label>
+            </div>
+
             <!-- Modelo -->
-            <div class="mb-3">
-                <label for="modelo" class="form-label">Modelo</label>
-                <input type="text" class="form-control" name="modelo" value="<?= $articulo['modelo'] ?>">
-                <!-- <div class="form-text">Introduzca Autor del libro</div> -->
+            <div class="form-floating mb-3">
+                
+                <input type="text" class="form-control" name="modelo" value="<?=$articulo->getModelo()?>">
+                <label class="form-label">Modelo</label>
             </div>
-            
-            <!-- Marca Select -->
-            <div class="mb-3">
-                <label for="marca" class="form-label">Marca</label>
+
+            <!-- Marca -->
+            <div class="form-floating mb-3">
+                
                 <select class="form-select" aria-label="Default select example" name="marca">
-                    <!-- Generar dinámicamente el parámetro selected en la etiqueta HTML option -->
-                    <?php foreach ($marcas as $indice => $marca): ?>
-                        <option value="<?= $indice ?>" <?= ($articulo['marca'] == $indice) ? 'selected' : null ?>>
-                            <?= $marca ?>
-                        </option>
+                    <?php foreach($marcas as $key => $marca): ?>
+                        <option value="<?=$key?>"
+                        <?=($articulo->getMarca() == $key)?'selected':null ?>
+                        >
+                        <?=$marca?></option>
                     <?php endforeach; ?>
                 </select>
+                <label class="form-label">Marca</label>
             </div>
 
             <!-- Unidades -->
-            <div class="mb-3">
-                <label for="unidades" class="form-label">Unidades</label>
-                <input type="number" class="form-control" name="unidades" step="0.01"
-                    value="<?= $articulo['unidades'] ?>">
-                <!-- <div class="form-text">Introduzca Precio</div> -->
+            <div class="form-floating mb-3">
+                
+                <input type="number" class="form-control" name="unidades" value="<?=$articulo->getUnidades()?>">
+                <label class="form-label">Unidades</label>
             </div>
+
             <!-- Precio -->
-            <div class="mb-3">
-                <label for="precio" class="form-label">Precio (€)</label>
-                <input type="number" class="form-control" name="precio" step="0.01" value="<?= $articulo['precio'] ?>">
-                <!-- <div class="form-text">Introduzca Precio</div> -->
+            <div class="form-floating mb-3">
+                
+                <input type="number" class="form-control" name="precio" step="0.01" value="<?=$articulo->getPrecio()?>">
+                <label class="form-label">Precio (€)</label>
             </div>
 
             <!-- Categorías -->
             <div class="mb-3">
-                <label for="categorias" class="form-label">Seleccione Categorías</label>
+                <label class="form-floating mb-3">Seleccionar Categorías</label>
                 <div class="form-control">
                     <?php foreach ($categorias as $indice => $categoria): ?>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="<?= $indice ?>" name="categorias[]" 
-                            <?= (in_array($indice, $articulo['categorias']) ? 'checked':null) ?> 
+                            <input class="form-check-input" type="checkbox" value="<?= $indice ?>" name="categorias[]"
+                            <?=(in_array($indice,$articulo->getCategorias()) ? 'checked': null)?>
                             >
                             <label class="form-check-label" for="">
                                 <?= $categoria ?>
-                            </label>
+                                <label>
                         </div>
                     <?php endforeach; ?>
                 </div>
             </div>
 
-            <!-- botones de acción -->
             <a class="btn btn-secondary" href="index.php" role="button">Cancelar</a>
-            <button type="reset" class="btn btn-danger">Restablecer</button>
             <button type="submit" class="btn btn-primary">Actualizar</button>
-
         </form>
-
         <br>
         <br>
         <br>
-
-
-
-
-        <!-- Pié del documento -->
-        <?php include 'views/partials/footer.html' ?>
 
     </div>
 
-    <!-- javascript bootstrap 532 -->
-    <?php include 'views/layouts/javascript.html' ?>
+    <?php
+    include 'views/partials/footer.html';
+    ?>
+    <!-- javascript bootstrap 512 -->
+    <?php
+    include "views/layouts/javascript.html";
+    ?>
+
 </body>
 
 </html>

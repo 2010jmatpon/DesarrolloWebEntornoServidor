@@ -147,12 +147,8 @@ class ArrayArticulos
         array_values($this->tabla);
     }
 
-    function buscar_en_tabla($tabla = [], $columna, $valor)
-    {
-
-        $columna_valores = array_column($tabla, $columna);
-        return array_search($valor, $columna_valores, false);
-
+    public function buscarId($indice){
+        return $this->tabla[$indice]; 
     }
 
 }
