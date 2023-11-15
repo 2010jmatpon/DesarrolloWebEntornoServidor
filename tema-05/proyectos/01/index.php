@@ -5,8 +5,8 @@
     */
 
     #clases
-    include("class/class.articulo.php");
-    include("class/class.arrayArticulo.php");
+    include("class/class.conexion.php");
+    include("class/class.fp.php");
 
     #model
     include("models/model.index.php");
