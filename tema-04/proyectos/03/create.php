@@ -9,8 +9,8 @@
     */
 
     # Class
-    include 'class/class.arrayArticulo.php';
-    include 'class/class.articulo.php';
+    include 'class/class.arrayAlumno.php';
+    include 'class/class.alumno.php';
 
     # Model
     include 'models/model.create.php';

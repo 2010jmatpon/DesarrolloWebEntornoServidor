@@ -13,38 +13,39 @@
                     - precio
 
     */
+  #Creamos un objeto de la clase ArrayArticulos
+    $alumnos = new ArrayAlumno();
+    $alumnos -> getAlumnos();
 
     # cargamos la tabla
-    $categorias = ArrayArticulos::getCategorias();
-    $marcas = ArrayArticulos::getMarcas();
+    $asignaturas = ArrayAlumno::getAsignaturas();
+    $cursos = ArrayAlumno::getCursos();
 
-    #Creamos un objeto de la clase ArrayArticulos
-    $articulos = new ArrayArticulos();
-    $articulos -> getDatos();
+  
 
     $id=$_POST['id'];
-    $descripcion=$_POST['descripcion'];
-    $modelo = $_POST['modelo'];
-    $marca = $_POST['marca'];
-    $categoria = $_POST['categorias'];
-    $unidades = $_POST['unidades'];
-    $precio = $_POST['precio'];
+    $nombre=$_POST['nombre'];
+    $apellidos = $_POST['apellidos'];
+    $email = $_POST['email'];
+    $fecha = $_POST['fecha'];
+    $cursosAlumn = $_POST['curso'];
+    $asignaturasAlumn = $_POST['asignaturas'];
     
 
-    $articulo = new Articulo(
+    $alumno = new Alumno(
         $id,
-        $descripcion,
-        $modelo,
-        $marca,
-        $categoria,
-        $unidades,
-        $precio
+        $nombre,
+        $apellidos,
+        $email,
+        $fecha,
+        $cursosAlumn,
+        $asignaturasAlumn
         
     );
 
 
-    $articulos -> create($articulo);
+    $alumnos -> create($alumno);
 
-    $notificacion = "Articulo creado con éxito";
+    $notificacion = "Alumno añadido con éxito";
 
 ?>

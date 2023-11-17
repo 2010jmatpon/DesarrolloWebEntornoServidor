@@ -1,8 +1,8 @@
 <?php 
 
     // Cargamos libreria 
-    include "class/class.articulo.php";
-    include "class/class.arrayArticulo.php";
+    include "class/class.alumno.php";
+    include "class/class.arrayAlumno.php";
 
     // Cargamos el modelo
     include "models/model.update.php";

@@ -1,8 +1,8 @@
 <?php 
 
     # Librería
-    include 'class/class.articulo.php';
-    include 'class/class.arrayArticulo.php';
+    include 'class/class.alumno.php';
+    include 'class/class.arrayAlumno.php';
     
     # Model
     include 'models/model.editar.php';

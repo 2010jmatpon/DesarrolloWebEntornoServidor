@@ -1,12 +1,12 @@
 <?php
 
-$categorias = ArrayArticulos::getCategorias();
-$marcas = ArrayArticulos::getMarcas();
-$articulos = new ArrayArticulos();
-$articulos->getDatos();
+$asignaturas = ArrayAlumno::getAsignaturas();
+$cursos = ArrayAlumno::getCursos();
+$alumnos = new ArrayAlumno();
+$alumnos->getAlumnos();
 
 $id = $_GET['indice'];
 
-$articulo = $articulos->buscarId($id);
+$alumno = $alumnos->buscarId($id);
 
 ?>

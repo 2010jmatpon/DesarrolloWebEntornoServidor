@@ -11,12 +11,12 @@
 */
 
 # cargamos la tabla
-$categorias = ArrayArticulos::getCategorias();
-$marcas = ArrayArticulos::getMarcas();
+$asignaturas= ArrayAlumno::getAsignaturas();
+$cursos = ArrayAlumno::getCursos();
 
 #Creamos un objeto de la clase ArrayArticulos
-$articulos = new ArrayArticulos();
-$articulos->getDatos();
+$alumnos = new ArrayAlumno();
+$alumnos->getAlumnos();
 
 
 # obtengo el  id del  artículo que deseo eliminar
@@ -25,8 +25,17 @@ $id = $_GET['indice'];
 
 
 
-$articulos->delete($id);
-$notificacion = "Articulo eliminado con éxito";
+if ($id !== false) {
+    // elimino elemento seleccionado 
+    $alumnos->delete($id);
+
+    # Generamos notificación
+    $notificacion = "Alumno eliminado con éxito";
+
+} else {
+    echo 'ERROR: libro no encontrado';
+    exit();
+}
 
 
 

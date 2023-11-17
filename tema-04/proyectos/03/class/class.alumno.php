@@ -27,15 +27,71 @@ class Alumno
 
     }
 
-    public function getEdad(){
-       $fechaNacimiento = new DateTime($this->fecha_nacimiento);
-       $hoy = new DateTime();
-       $edad = $hoy->diff($fechaNacimiento)->y;
-       return $edad; 
+    public function getId()
+    {
+        return $this->id;
     }
-
-
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+    public function getApellidos()
+    {
+        return $this->apellidos;
+    }
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    public function getFechaNacimiento()
+    {
+        return $this->fecha_nacimiento;
+    }
+    public function getCurso()
+    {
+        return $this->curso;
+    }
+    public function getAsignaturas()
+    {
+        return $this->asignatura;
+    }
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+    }
+    public function setApellidos($apellidos)
+    {
+        $this->apellidos = $apellidos;
+    }
+    public function setEmail($email)
+    {
+    $this->email = $email;
+    }
+    public function setFechaNacimiento($fecha_nacimiento)
+    {
+        $this->fecha_nacimiento = $fecha_nacimiento;
+    }
+    public function setCurso($curso)
+    {
+        $this->curso = $curso;
+    }
+    public function setAsignaturas($asignatura)
+    {
+        $this->asignatura = $asignatura;
+    }
+    public function getEdad()
+    {
+        $fechaNacimiento = DateTime::createFromFormat('d/m/Y', $this->fecha_nacimiento);
+        $hoy = new DateTime();
+        $edad = $hoy->diff($fechaNacimiento)->y;
+        return $edad;
+    }
 }
+
 
 
 

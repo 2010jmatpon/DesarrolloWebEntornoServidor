@@ -14,59 +14,57 @@
         <!-- cabecera documento -->
         <?php include "views/partials/header.php" ?>
 
-        <legend>Articulo seleccionado</legend>
+        <legend>Alumno seleccionado</legend>
         <form>
 
             <form action="mostrar.php">
 
                 <div class="mb-3">
                     <label for="id" class="form-label">Id: </label>
-                    <input type="text" class="form-control" name="id" value="<?= $articulo->getId() ?>" disabled>
+                    <input type="text" class="form-control" name="id" value="<?= $alumno->getId() ?>" disabled>
 
                 </div>
 
                 <div class="mb-3">
-                    <label for="descripcion" class="form-label">Descripción: </label>
-                    <input type="text" class="form-control" name="descripcion" value="<?= $articulo->getDescripcion() ?>"
+                    <label for="nombre" class="form-label">Nombre: </label>
+                    <input type="text" class="form-control" name="nombre" value="<?= $alumno->getNombre() ?>"
                         disabled>
 
                 </div>
 
                 <div class="mb-3">
-                    <label for="modelo" class="form-label">Modelo: </label>
-                    <input type="text" class="form-control" name="modelo" value="<?= $articulo->getModelo() ?>" disabled>
+                    <label for="apellidos" class="form-label">Apellidos: </label>
+                    <input type="text" class="form-control" name="apellidos" value="<?= $alumno->getApellidos() ?>" disabled>
+
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email: </label>
+                    <input type="text" class="form-control" name="email" value="<?= $alumno->getEmail() ?>" disabled>
+
+                </div>
+                <div class="mb-3">
+                    <label for="edad" class="form-label">Edad: </label>
+                    <input type="text" class="form-control" name="edad" value="<?= $alumno->getEdad() ?>" disabled>
 
                 </div>
 
                 <!-- Falta poner que no muestre los números sino los nombres. -->
                 <!-- MARCAS -->
                 <div class="mb-3">
-                    <label for="categoria" class="form-label">Marcas: </label>
-                    <input type="text" class="form-control" name="categoria" value="<?= $articulo->getMarca() ?>"
+                    <label for="curso" class="form-label">Curso: </label>
+                    <input type="text" class="form-control" name="curso" value="<?= $alumno->getCurso() ?>"
                         disabled>
 
                 </div>
 
                 <!-- CATEGORIAS -->
                 <div class="mb-3">
-                    <label for="categoria" class="form-label">Categoria: </label>
-                    <input type="text" class="form-control" name="categoria"
-                        value="<?= implode(", ", $articulo->getCategorias()) ?>" disabled>
+                    <label for="asignaturas" class="form-label">Asignaturas: </label>
+                    <input type="text" class="form-control" name="asignaturas"
+                        value="<?= implode(", ", ArrayAlumno::mostrarAsignatura($asignaturas, $alumno->getAsignaturas())) ?>" disabled>
 
                 </div>
 
-                <div class="mb-3">
-                    <label for="unidades" class="form-label">Unidades: </label>
-                    <input type="number" class="form-control" name="unidades" value="<?= $articulo->getUnidades() ?>"
-                        disabled>
-
-                </div>
-
-                <div class="mb-3">
-                    <label for="precio" class="form-label">Precio: </label>
-                    <input type="number" class="form-control" name="precio" value="<?= $articulo->getPrecio() ?>" disabled>
-
-                </div>
 
                 <!-- Botones de acción -->
 

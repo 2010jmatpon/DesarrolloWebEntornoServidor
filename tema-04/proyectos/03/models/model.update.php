@@ -1,33 +1,34 @@
 <?php
 
-$categorias = ArrayArticulos::getCategorias();
-$marcas = ArrayArticulos::getMarcas();
-$articulos = new ArrayArticulos();
-$articulo = new Articulo();
-$articulos->getDatos();
+$asignaturas = ArrayAlumno::getAsignaturas();
+$cursos = ArrayAlumno::getCursos();
+$alumnos = new ArrayAlumno();
+$alumno = new Alumno();
+$alumnos->getAlumnos();
 
-$id = $_GET['id'];
+$indice = $_GET['indice'];
 
-$articulo = $articulos->buscarId($id);
 
-$descripcion = $_POST['descripcion'];
-    $modelo = $_POST['modelo'];
-    $marca = $_POST['marca'];
-    $categoriasArt = $_POST['categorias'];
-    $unidades = $_POST['unidades'];
-    $precio = $_POST['precio'];
+    $id = $_POST['id'];
+    $nombre = $_POST['nombre'];
+    $apellidos = $_POST['apellidos'];
+    $email = $_POST['email'];
+    $fecha = $_POST['fecha'];
+    $fecha = date('d/m/y', strtotime($fecha));
+    $curso = $_POST['curso'];
+    $asignaturasAlumn = $_POST['asignaturas'];
 
-    # Editamos los valores del articulo con los valores
 
-    $articulo->setDescripcion($descripcion);
-    $articulo->setModelo($modelo);
-    $articulo->setMarca($marca);
-    $articulo->setCategorias($categoriasArt);
-    $articulo->setUnidades($unidades);
-    $articulo->setPrecio($precio);
+    $alumno->setId($id);
+    $alumno->setNombre($nombre);
+    $alumno->setApellidos($apellidos);
+    $alumno->setEmail($email);
+    $alumno->setFechaNacimiento($fecha);
+    $alumno->setCurso($curso);
+    $alumno->setAsignaturas($asignaturasAlumn);
 
-    $articulos->update($articulo, $id );
+    $alumnos->update($indice, $alumno );
 
     # Generamos una notificación
-    $notificacion = 'Articulo modificado con éxito';
+    $notificacion = 'Alumno modificado con éxito';
 ?>

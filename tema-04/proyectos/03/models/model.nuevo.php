@@ -8,12 +8,12 @@
     */
 
     # cargamos la tabla
-    $categorias = ArrayArticulos::getCategorias();
-    $marcas = ArrayArticulos::getMarcas();
+    $asignaturas = ArrayAlumno::getAsignaturas();
+    $cursos = ArrayAlumno::getCursos();
 
     #Creamos un objeto de la clase ArrayArticulos
-    $articulos = new ArrayArticulos();
-    $articulos -> getDatos();
+    $alumnos = new ArrayAlumno();
+    $alumnos -> getAlumnos();
 
 
 ?>

@@ -11,12 +11,12 @@
 
     #Cargamos los arrays a partir de los métodos estáticos de la clase
     #ArrayArticulos
-    $categorias = ArrayArticulos::getCategorias();
-    $marcas = ArrayArticulos::getMarcas();
+    $asignaturas = ArrayAlumno::getAsignaturas();
+    $cursos = ArrayAlumno::getCursos();
 
     #Creamos un objeto de la clase ArrayArticulos
-    $articulos = new ArrayArticulos();
-    $articulos -> getDatos();
+    $alumnos = new arrayAlumno();
+    $alumnos -> getAlumnos();
     
 
    
