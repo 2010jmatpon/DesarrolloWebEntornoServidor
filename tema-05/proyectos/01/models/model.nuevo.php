@@ -8,8 +8,7 @@
     */
 
     # cargamos la tabla
-    $categorias = ArrayArticulos::getCategorias();
-    $marcas = ArrayArticulos::getMarcas();
+    $fp = new Fp();
 
     #Creamos un objeto de la clase ArrayArticulos
     $articulos = new ArrayArticulos();

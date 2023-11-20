@@ -38,8 +38,30 @@ class Fp extends Conexion
 
         //objeto clase mysqli_result
         $result = $stmt->get_result();
-        
+
         return $result;
+    }
+
+    public function getCursos()
+    {
+        $sql = "SELECT
+                    id, 
+                    nombreCorto curso 
+                FROM 
+                    cursos 
+                ORDER BY id";
+                
+        #Mediante Plantilla SQL o Prepare
+        //Objeto clase mysqli_stmt
+        $stmt = $this->db->prepare($sql);
+
+        //ejecuto
+        $stmt->execute();
+
+        //objeto clase mysqli_result
+        $result = $stmt->get_result();
+
+        return $result;        
     }
 }
 ?>

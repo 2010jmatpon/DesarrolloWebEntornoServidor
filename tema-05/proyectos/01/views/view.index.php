@@ -13,7 +13,7 @@
         <!-- cabecera documento -->
         <?php include 'views/partials/header.php' ?>
 
-        <legend>Tabla Artículos</legend>
+        <legend>Tabla Alumnos</legend>
 
         <!-- Menu Principal -->
         <?php include 'views/partials/menu_prin.php' ?>
@@ -27,52 +27,60 @@
                 <tr>
                     <!-- personalizado -->
                     <th>Id</th>
-                    <th>Descripción</th>
-                    <th>Modelo</th>
-                    <th>Marca</th>
-                    <th>Categorias</th>
-                    <th class="text-end">Stock</th>
-                    <th class="text-end">Precio</th>
+                    <th>Alumno</th>
+                    <th class="text-end">Edad</th>
+                    <th>DNI</th>
+                    <th>Poblacion</th>
+                    <th>Email</th>
+                    <th>Telefono</th>
+                    <th>Curso</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <!-- Mostramos cuerpo de la tabla -->
             <tbody>
 
-                <?php foreach ($articulos -> getTabla() as $indice => $articulo): ?>
+                <?php foreach ($alumnos as $alumno): ?>
                     <tr>
                         <!-- Formatos distintos para cada  columna -->
 
                         <!-- Detalles de artículos -->
-                        <td><?= $articulo->getId() ?></td>
-                        <td><?= $articulo->getDescripcion() ?></td>
-                        <td><?= $articulo->getModelo() ?></td>
-                        <td><?= $marcas[$articulo->getMarca()] ?></td>
-                        <td><?= implode(', ', ArrayArticulos::mostrarCategorias($categorias, $articulo->getCategorias())) ?></td>
-                        <td class="text-end"><?= $articulo->getUnidades() ?></td>
-                        <td class="text-end"><?= number_format($articulo->getPrecio(), 2, ',', '.')?> €</td>
-
+                        <td><?= $alumno['id'] ?></td>
+                        <td><?= $alumno['alumno'] ?></td>
+                        <td class="text-end"><?= $alumno['edad'] ?></td>
+                        <td><?= $alumno['dni'] ?></td>
+                        <td><?= $alumno['poblacion'] ?></td>
+                        <td><?= $alumno['email'] ?></td>
+                        <td><?= $alumno['telefono'] ?></td>
+                        <td><?= $alumno['curso'] ?></td>
+                       
                         <!-- botones de acción -->
                         <td>
                             <!-- botón  eliminar -->
-                            <a href="eliminar.php?indice=<?= $indice ?>" title="Eliminar">
+                            <a href="eliminar.php?id=<?= $alumno['id'] ?>" title="Eliminar">
                             <i class="bi bi-trash-fill"></i></a>
 
                             <!-- botón  editar -->
-                            <a href="editar.php?indice=<?= $indice ?>" title="Editar">
+                            <a href="editar.php?id=<?= $alumno['id'] ?>" title="Editar">
                             <i class="bi bi-pencil-square"></i></a>
 
                             <!-- botón  mostrar -->
-                            <a href="mostrar.php?indice=<?= $indice ?>" title="Mostrar">
+                            <a href="mostrar.php?id=<?= $alumno['id'] ?>" title="Mostrar">
                             <i class="bi bi-card-text"></i></a>
 
                         </td>
                     </tr>
 
                 <?php endforeach; ?>
-
-
             </tbody>
+
+            <tfoot>
+                <tr>
+                    <td colspan="7">nº Articulos
+                    <?= $alumnos->num_rows ?>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
 
 
