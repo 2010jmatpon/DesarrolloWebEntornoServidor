@@ -9,15 +9,11 @@
 
     setlocale(LC_MONETARY,"es_ES");
 
-    #Cargamos los arrays a partir de los métodos estáticos de la clase
-    #ArrayArticulos
-    $categorias = ArrayArticulos::getCategorias();
-    $marcas = ArrayArticulos::getMarcas();
+    #Caonecto con la BD
+    $db = new Fp();
 
-    #Creamos un objeto de la clase ArrayArticulos
-    $articulos = new ArrayArticulos();
-    $articulos -> getDatos();
-    
+    #Objeto result con los detalles del alumno
+    $alumnos = $db->getAlumnos();
 
    
 

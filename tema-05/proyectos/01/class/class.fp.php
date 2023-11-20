@@ -17,7 +17,7 @@ class Fp extends Conexion
                     alumnos.telefono,
                     alumnos.poblacion,
                     alumnos.dni,
-                    timestampdiff(YEAR, alumnos.fechaNac,NOW() ) EDAD,
+                    timestampdiff(YEAR, alumnos.fechaNac,NOW() ) edad,
                     cursos.nombreCorto curso
                 FROM
                     alumnos
@@ -25,9 +25,20 @@ class Fp extends Conexion
                     cursos
                     ON alumnos.id_curso = cursos.id
                 ORDER BY id";
+        #Ejecutamos directamente SQL
+        //Objeto de la clase mysqli_result
+        //$result = $this->db->query($sql);
 
-        $result = $this->db->prepare($sql);
+        #Mediante Plantilla SQL o Prepare
+        //Objeto clase mysqli_stmt
+        $stmt = $this->db->prepare($sql);
 
+        //ejecuto
+        $stmt->execute();
+
+        //objeto clase mysqli_result
+        $result = $stmt->get_result();
+        
         return $result;
     }
 }
