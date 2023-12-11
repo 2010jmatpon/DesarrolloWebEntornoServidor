@@ -14,6 +14,7 @@
 				ERROR
 			</div>
 			<div class="card-body">
+				<h3>ERROR 404</h3>
 				
                 <p class="lead"><?php echo $this->mensaje ?></p>
 
