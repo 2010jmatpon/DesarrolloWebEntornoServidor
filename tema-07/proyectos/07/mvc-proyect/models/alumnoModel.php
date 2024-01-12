@@ -434,7 +434,7 @@ class alumnoModel extends Model
 
             $sql = "
                 SELECT * FROM cursos
-                WHERE id = :id_cursos
+                WHERE id = :id_curso
             ";
 
             # Conectar con la base de datos
@@ -442,7 +442,7 @@ class alumnoModel extends Model
 
             $pdostmt = $conexion->prepare($sql);
 
-            $pdostmt->bindParam(':id', $id_curso, PDO::PARAM_INT);
+            $pdostmt->bindParam(':id_curso', $id_curso, PDO::PARAM_INT);
             $pdostmt->execute();
 
             if($pdostmt->rowCount() == 1){

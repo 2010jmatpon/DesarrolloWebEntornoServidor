@@ -81,12 +81,12 @@
             }
 
             //Fecha Nacimiento: obligatorio
-            $valores = explode('/', $fechaNac);
-            if (empty($fechaNac)){
-                $errores['fechaNac']= 'El campo fecha nacimiento es obligatorio';
-            } else if (!checkdate($valores[1], $valores[0], $valores[2])){
-                $errores['fechaNac']= 'Fecha no valida';
-            }
+            // $valores = explode('/', $fechaNac);
+            // if (empty($fechaNac)){
+            //     $errores['fechaNac']= 'El campo fecha nacimiento es obligatorio';
+            // } else if (!checkdate($valores[1], $valores[0], $valores[2])){
+            //     $errores['fechaNac']= 'Fecha no valida';
+            // }
 
             //Email: obligatorio, formato válido y clave secundaria
             if (empty($email)){
@@ -107,7 +107,7 @@
 
             if (empty($dni)){
                 $errores['dni']= 'El campo dni es obligatorio';
-            } else if  (!filter_var($dni, FILTER_VALIDATE_REGEXP)){
+            } else if  (!filter_var($dni, FILTER_VALIDATE_REGEXP, $options)){
                 $errores['dni']= 'El formato introducido es incorrecto';
             } else if (!$this->model->validateUniqueDni($dni)){
                 $errores['dni']= 'Dni ya registrado';
@@ -117,7 +117,7 @@
             //id_curso: obligatorio, entero, existente
             if (empty($id_curso)){
                 $errores['id_curso']= 'El campo id_curso es obligatorio';
-            } else if  (!filter_var($id_curso, FILTER_VALIDATE_REGEXP)){
+            } else if  (!filter_var($id_curso, FILTER_VALIDATE_INT)){
                 $errores['id_curso']= 'El formato introducido es incorrecto';
             } else if (!$this->model->validateCurso($id_curso)){
                 $errores['id_curso']= 'Curso no existente';
@@ -128,7 +128,9 @@
 
             if(!empty($errores)){
                 //errores de validacion
-                $_SESSION['$alumno'] = serialize($alumno);
+                $_SESSION['alumno'] = serialize($alumno);
+                $_SESSION['error'] = 'Formulario no validado';
+                $_SESSION['errores'] = $errores;
             } else{
                 //crear alumno
                 # Añadir registro a la tabla
