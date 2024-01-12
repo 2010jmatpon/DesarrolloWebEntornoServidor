@@ -10,7 +10,16 @@
         }
 
         function render() {
+            
+            #inicio o continuo sesion
+            session_start();
 
+            #comprobar si existe mensaje
+            if (isset($_SESSION['mensaje'])){
+                $this->view->mensaje = $_SESSION['mensaje'];
+                unset($_SESSION['mensaje']);
+
+            }
             # Creo la propiedad title de la vista
             $this->view->title = "Home - Panel Control Alumnos";
             
