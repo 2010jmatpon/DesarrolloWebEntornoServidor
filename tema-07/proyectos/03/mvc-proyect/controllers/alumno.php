@@ -17,20 +17,28 @@ class Alumno extends Controller
         #inicio o continuo sesion
         session_start();
 
-        #comprobar si existe mensaje
-        if (isset($_SESSION['mensaje'])) {
-            $this->view->mensaje = $_SESSION['mensaje'];
-            unset($_SESSION['mensaje']);
+        #compruebo usuario autentificado
+        if (isset($_SESSION['id'])) {
+            $_SESSION['notify'] = "Usuario sin autentificar";
+            header('location' . URL . 'login');
+        } else {
 
+
+            #comprobar si existe mensaje
+            if (isset($_SESSION['notify'])) {
+                $this->view->mensaje = $_SESSION['notify'];
+                unset($_SESSION['notify']);
+
+            }
+            # Creo la propiedad title de la vista
+            $this->view->title = "Home - Panel Control Alumnos";
+
+            # Creo la propiedad alumnos dentro de la vista
+            # Del modelo asignado al controlador ejecuto el método get();
+            $this->view->alumnos = $this->model->get();
+
+            $this->view->render('alumno/main/index');
         }
-        # Creo la propiedad title de la vista
-        $this->view->title = "Home - Panel Control Alumnos";
-
-        # Creo la propiedad alumnos dentro de la vista
-        # Del modelo asignado al controlador ejecuto el método get();
-        $this->view->alumnos = $this->model->get();
-
-        $this->view->render('alumno/main/index');
     }
 
     function new()
@@ -71,7 +79,7 @@ class Alumno extends Controller
 
     function create($param = [])
     {
-        
+
         #Iniciar Sesión
         session_start();
 
