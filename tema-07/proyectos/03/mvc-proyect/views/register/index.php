@@ -18,7 +18,7 @@
                 <div class="card">
                     <div class="card-header">Registro Usuarios</div>
                     <div class="card-body">
-                        <form method="POST" action="<?=URL?>">
+                        <form method="POST" action="<?=URL?>/register/validate">
                             
                             <!-- campo name -->
                             <div class="mb-3 row">

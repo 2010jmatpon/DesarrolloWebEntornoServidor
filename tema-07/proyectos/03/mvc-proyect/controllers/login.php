@@ -13,10 +13,10 @@
             $this->view->password = null;
 
             # Control de los mensajes
-            if (isset($_SESSION['mensaje'])) {
+            if (isset($_SESSION['notify'])) {
 
-                $this->view->mensaje = $_SESSION['mensaje'];
-                unset($_SESSION['mensaje']);
+                $this->view->mensaje = $_SESSION['notify'];
+                unset($_SESSION['notify']);
 
                 # Autorelleno en caso de registro con éxito
 

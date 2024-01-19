@@ -96,7 +96,7 @@
             
             # Añade nuevo usuario
 
-            $this->model->crear($name, $email, $password);
+            $this->model->create($name, $email, $password);
     
             $_SESSION['notify'] = "Usuario registrado correctamente";
             $_SESSION['email'] = $email;

@@ -43,7 +43,7 @@
     }
 
     # Creo nuevo usuario a partir de los datos de formulario de registro
-    public function crear ($name, $email, $pass) {
+    public function create ($name, $email, $pass) {
         try {
             
             $password_encriptado = password_hash($pass, CRYPT_BLOWFISH);
