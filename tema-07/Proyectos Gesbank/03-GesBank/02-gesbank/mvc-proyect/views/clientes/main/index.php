@@ -3,7 +3,7 @@
 
 <head>
     <!-- head -->
-    <?php require_once("template/partials/head.php");  ?>
+    <?php require_once("template/partials/head.php"); ?>
     <title>Clientes - Gesbank</title>
 </head>
 
@@ -31,26 +31,49 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($this->clientes as $cliente) : ?>
+                <?php foreach ($this->clientes as $cliente): ?>
                     <tr>
-                        <td><?= $cliente->id ?></td>
-                        <td><?= $cliente->cliente ?></td>
-                        <td><?= $cliente->email ?></td>
-                        <td><?= $cliente->telefono ?></td>
-                        <td><?= $cliente->ciudad ?></td>
-                        <td><?= $cliente->dni ?></td>
+                        <td>
+                            <?= $cliente->id ?>
+                        </td>
+                        <td>
+                            <?= $cliente->cliente ?>
+                        </td>
+                        <td>
+                            <?= $cliente->email ?>
+                        </td>
+                        <td>
+                            <?= $cliente->telefono ?>
+                        </td>
+                        <td>
+                            <?= $cliente->ciudad ?>
+                        </td>
+                        <td>
+                            <?= $cliente->dni ?>
+                        </td>
                         <td>
                             <!-- botones de acción -->
-                            <a href="<?= URL ?>clientes/delete/<?= $cliente->id ?>" title="Eliminar" onclick="return confirm('¿Quieres Borrar?')"> <i class="bi bi-trash"></i> </a>
-                            <a href="<?= URL ?>clientes/editar/<?= $cliente->id ?>" title="Editar"> <i class="bi bi-pencil"></i> </a>
-                            <a href="<?= URL ?>clientes/mostrar/<?= $cliente->id ?>" title="Mostrar"> <i class="bi bi-eye"></i> </a>
+                            <a href="<?= URL ?>clientes/delete/<?= $cliente->id ?>" title="Eliminar"
+                                onclick="return confirm('¿Quieres Borrar?')" class="btn btn-danger" <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['delete'])) ?
+                                    'disabled' : null ?>> 
+                                    <i class="bi bi-trash"></i> </a>
+                            <a href="<?= URL ?>clientes/editar/<?= $cliente->id ?>" title="Editar" class="btn btn-primary
+                            <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['edit'])) ?
+									'disabled' : null ?>"
+                            > <i class="bi bi-pencil"></i> </a>
+                            <a href="<?= URL ?>clientes/mostrar/<?= $cliente->id ?>" title="Mostrar" class="btn btn-warning
+                            <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['show'])) ?
+                                    'disabled' : null ?>"
+                            > <i class="bi bi-eye"></i> </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="8">Nº Registros: <?= $this->clientes->rowCount() ?> </td>
+                    <td colspan="8">Nº Registros:
+                        <?= $this->clientes->rowCount() ?>
+                    </td>
                 </tr>
             </tfoot>
 

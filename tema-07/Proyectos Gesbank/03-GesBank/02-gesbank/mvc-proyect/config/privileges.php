@@ -7,10 +7,10 @@ REGISTRADO	 	NO	NO	NO	 SI	 SI 	 SI
 
 */
 
-$GLOBALS['alumno']['main'] = [1, 2, 3];
-$GLOBALS['alumno']['new'] = [1, 2];
-$GLOBALS['alumno']['edit'] = [1, 2];
-$GLOBALS['alumno']['delete'] = [1];
-$GLOBALS['alumno']['show'] = [1, 2, 3];
-$GLOBALS['alumno']['filter'] = [1, 2, 3];
-$GLOBALS['alumno']['order'] = [1, 2, 3];
+$GLOBALS['clientes']['main'] = [1, 2, 3];
+$GLOBALS['clientes']['new'] = [1, 2];
+$GLOBALS['clientes']['edit'] = [1, 2];
+$GLOBALS['clientes']['delete'] = [1];
+$GLOBALS['clientes']['show'] = [1, 2, 3];
+$GLOBALS['clientes']['filter'] = [1, 2, 3];
+$GLOBALS['clientes']['order'] = [1, 2, 3];

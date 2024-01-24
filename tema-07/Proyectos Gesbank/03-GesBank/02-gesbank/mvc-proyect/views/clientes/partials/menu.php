@@ -7,7 +7,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="<?=URL?>clientes/nuevo">Nuevo</a>
+                            <a class="nav-link active <?= in_array($_SESSION['id_rol'], $GLOBALS['clientes']['new'])?: 'disabled'?>"  href="<?=URL?>clientes/nuevo">Nuevo</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -26,7 +26,7 @@
                     </ul>
                     <form class="d-flex" method="get" action="<?=URL?>clientes/buscar">
                         <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search" name="expresion">
-                        <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+                        <button class="btn btn-outline-secondary <?= in_array($_SESSION['id_rol'], $GLOBALS['clientes']['filter'])? 'null': 'disabled'?>" type="submit">Buscar</button>
                     </form>
                 </div>
             </div>
