@@ -17,11 +17,11 @@
 
     */
 
-    $GLOBALS['alumno']['main'] = [1, 2, 3];
-    $GLOBALS['alumno']['new'] = [1, 2];
-    $GLOBALS['alumno']['edit'] = [1, 2];
-    $GLOBALS['alumno']['delete'] = [1];
-    $GLOBALS['alumno']['show'] = [1, 2, 3];
-    $GLOBALS['alumno']['filter'] = [1, 2, 3];
-    $GLOBALS['alumno']['order'] = [1, 2, 3];
+    $GLOBALS['album']['main'] = [1, 2, 3];
+    $GLOBALS['album']['new'] = [1, 2];
+    $GLOBALS['album']['edit'] = [1, 2];
+    $GLOBALS['album']['delete'] = [1];
+    $GLOBALS['album']['show'] = [1, 2, 3];
+    $GLOBALS['album']['filter'] = [1, 2, 3];
+    $GLOBALS['album']['order'] = [1, 2, 3];
 
