@@ -62,6 +62,30 @@ class albumModel extends Model
         }
     }
 
+    public function getAlbum($id)
+    {
+        try {
+            $sql = " 
+                    SELECT     
+                        *
+                    FROM  
+                        albumes  
+                    WHERE
+                        id = :id";
+
+            $conexion = $this->db->connect();
+            $pdoSt = $conexion->prepare($sql);
+            $pdoSt->bindParam(":id", $id, PDO::PARAM_INT);
+            $pdoSt->setFetchMode(PDO::FETCH_OBJ);
+            $pdoSt->execute();
+            return $pdoSt->fetch();
+
+        } catch (PDOException $e) {
+            require_once("template/partials/errorDB.php");
+            exit();
+        }
+    }
+
 
     public function create(classAlbum $album)
     {

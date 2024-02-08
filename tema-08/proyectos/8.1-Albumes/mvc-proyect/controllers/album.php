@@ -474,6 +474,26 @@ class Album extends Controller
         }
     }
 
+    public function show($param = [])
+    {
+        session_start();
+        if (!isset($_SESSION['id'])) {
+            $_SESSION['mensaje'] = "Usuario debe autentificarse";
+
+            header("location:" . URL . "login");
+
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['album']['show']))) {
+            $_SESSION['mensaje'] = "Operación sin privilegio";
+            header("location:" . URL . "album");
+        } else {
+            $id = $param[0];
+            $this->view->title = "ALBUM";
+            $this->view->albumes = $this->model->getAlbum($id);
+
+            $this->view->render("album/show/index");
+        }
+    }
+
     function upload($param = []){
 
         sec_session_start();
@@ -500,3 +520,4 @@ class Album extends Controller
 
     }
 }
+
