@@ -491,45 +491,109 @@ class Clientes extends Controller
     {
         session_start();
 
-        // Obtener el ID del cliente desde los parámetros
-        $idCliente = $param[0];
+        if (!isset($_SESSION['id'])) {
+            $_SESSION['mensaje'] = "Usuario debe autentificarse";
 
-        // Obtener los datos del cliente desde el modelo usando el ID
-        $cliente = $this->model->getCliente($idCliente);
+            header("location:" . URL . "login");
 
-        // Nombre del archivo CSV
-        $filename = "cliente_" . $cliente->id . "_" . date("Y-m-d") . ".csv";
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['export']))) {
+            $_SESSION['mensaje'] = "Operación sin privilegio";
+            header("location:" . URL . "clientes");
+        } else {
+            // Obtener el ID del cliente desde los parámetros
+            $idCliente = $param[0];
 
-        // Encabezados HTTP para indicar que se trata de un archivo descargable
-        header('Content-Type: text/csv');
-        header('Content-Disposition: attachment; filename="' . $filename . '"');
+            // Obtener los datos del cliente desde el modelo usando el ID
+            $cliente = $this->model->getCliente($idCliente);
 
-        // Abrir el archivo temporal en modo escritura
-        $file = fopen('php://output', 'w');
+            // Nombre del archivo CSV
+            $filename = "cliente_" . $cliente->id . "_" . date("Y-m-d") . ".csv";
 
-        // Escribir los encabezados del CSV
-        fputcsv($file, ['ID', 'Apellidos', 'Nombre', 'Teléfono', 'Ciudad', 'DNI', 'Email']);
+            // Encabezados HTTP para indicar que se trata de un archivo descargable
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment; filename="' . $filename . '"');
 
-        // Escribir los datos del cliente en el archivo CSV
-        fputcsv($file, [
-            $cliente->id,
-            $cliente->apellidos,
-            $cliente->nombre,
-            $cliente->telefono,
-            $cliente->ciudad,
-            $cliente->dni,
-            $cliente->email
-        ]);
+            // Abrir el archivo temporal en modo escritura
+            $file = fopen('php://output', 'w');
 
-        // $_SESSION['mensaje'] = "Cliente exportado correctamente";
+            // Escribir los encabezados del CSV
+            fputcsv($file, ['ID', 'Apellidos', 'Nombre', 'Teléfono', 'Ciudad', 'DNI', 'Email']);
 
-        // Cerrar el archivo
-        fclose($file);
+            // Escribir los datos del cliente en el archivo CSV
+            fputcsv($file, [
+                $cliente->id,
+                $cliente->apellidos,
+                $cliente->nombre,
+                $cliente->telefono,
+                $cliente->ciudad,
+                $cliente->dni,
+                $cliente->email
+            ]);
+
+            // $_SESSION['mensaje'] = "Cliente exportado correctamente";
+
+            // Cerrar el archivo
+            fclose($file);
 
 
-        // Terminar la ejecución del script para evitar que se muestre contenido adicional
-        // exit;
+            // Terminar la ejecución del script para evitar que se muestre contenido adicional
+            // exit;
+        }
+    }
+    # Método exportCSV
+    # Permite exportar cualquier archivo a CSV
+    public function exportAllCSV($param = [])
+    {
+        session_start();
 
+        if (!isset($_SESSION['id'])) {
+            $_SESSION['mensaje'] = "Usuario debe autentificarse";
+
+            header("location:" . URL . "login");
+
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['export']))) {
+            $_SESSION['mensaje'] = "Operación sin privilegio";
+            header("location:" . URL . "clientes");
+        } else {
+            // Obtener el ID del cliente desde los parámetros
+            // $idCliente = $param[0];
+
+            // Obtener los datos del cliente desde el modelo usando el ID
+            $cliente = $this->model->get();
+
+            // Nombre del archivo CSV
+            $filename = "cliente_" . $cliente->id . "_" . date("Y-m-d") . ".csv";
+
+            // Encabezados HTTP para indicar que se trata de un archivo descargable
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment; filename="' . $filename . '"');
+
+            // Abrir el archivo temporal en modo escritura
+            $file = fopen('php://output', 'w');
+
+            // Escribir los encabezados del CSV
+            fputcsv($file, ['ID', 'Apellidos', 'Nombre', 'Teléfono', 'Ciudad', 'DNI', 'Email']);
+
+            // Escribir los datos del cliente en el archivo CSV
+            fputcsv($file, [
+                $cliente->id,
+                $cliente->apellidos,
+                $cliente->nombre,
+                $cliente->telefono,
+                $cliente->ciudad,
+                $cliente->dni,
+                $cliente->email
+            ]);
+
+            // $_SESSION['mensaje'] = "Cliente exportado correctamente";
+
+            // Cerrar el archivo
+            fclose($file);
+
+
+            // Terminar la ejecución del script para evitar que se muestre contenido adicional
+            // exit;
+        }
     }
 
 }

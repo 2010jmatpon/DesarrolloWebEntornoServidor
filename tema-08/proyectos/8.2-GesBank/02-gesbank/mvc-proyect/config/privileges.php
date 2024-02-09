@@ -14,3 +14,5 @@ $GLOBALS['clientes']['delete'] = [1];
 $GLOBALS['clientes']['show'] = [1, 2, 3];
 $GLOBALS['clientes']['filter'] = [1, 2, 3];
 $GLOBALS['clientes']['order'] = [1, 2, 3];
+$GLOBALS['clientes']['export'] = [1];
+$GLOBALS['clientes']['import'] = [1];

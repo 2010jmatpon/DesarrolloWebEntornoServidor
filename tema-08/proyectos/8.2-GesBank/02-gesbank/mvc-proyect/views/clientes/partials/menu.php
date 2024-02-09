@@ -9,6 +9,9 @@
                         <li class="nav-item">
                             <a class="nav-link active <?= in_array($_SESSION['id_rol'], $GLOBALS['clientes']['new'])?: 'disabled'?>"  href="<?=URL?>clientes/nuevo">Nuevo</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active"  href="<?=URL?>clientes/exportAllCSV">Exportar</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Ordenar
