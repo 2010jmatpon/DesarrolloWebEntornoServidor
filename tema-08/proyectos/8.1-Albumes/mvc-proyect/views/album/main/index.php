@@ -63,6 +63,8 @@
 
 							<!-- Objeto clase pdostatement en foreach -->
 							<?php foreach ($this->albumes as $album): ?>
+								<?php require_once("template/partials/modal.php") ?>
+
 								<tr>
 									<!-- Formatos distintos para cada  columna -->
 
@@ -118,6 +120,11 @@
 												'disabled' : null ?>">
 											<i class="bi bi-card-text"></i>
 										</a>
+
+										<a href="#" title="Subir" class="btn btn-success" data-bs-toggle="modal"
+											data-bs-target="#subir<?= $album->id ?>" <?= (!in_array($_SESSION['id_rol'], $GLOBALS['album']['upload'])) ?
+											  	'disabled' : null ?>><i class="bi bi-cloud-plus-fill"></i></a>
+
 
 									</td>
 								</tr>

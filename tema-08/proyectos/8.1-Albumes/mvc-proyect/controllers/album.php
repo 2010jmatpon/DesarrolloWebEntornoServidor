@@ -85,7 +85,7 @@ class Album extends Controller
             # etiqueta title de la vista
             $this->view->title = "Añadir - Gestión Alumnos";
 
-            
+
 
             # cargo la vista con el formulario nuevo alumno
             $this->view->render('album/new/index');
@@ -139,7 +139,7 @@ class Album extends Controller
             // Nombre: obligatorio
             if (empty($titulo)) {
                 $errores['titulo'] = 'El campo titulo es  obligatorio';
-            } else if (strlen($titulo) > 100){
+            } else if (strlen($titulo) > 100) {
                 $errores['titulo'] = "El campo título debe ser inferior a 100 caractéres";
             }
 
@@ -191,7 +191,7 @@ class Album extends Controller
                 # Añadir registro a la tabla
                 $this->model->create($album);
 
-                mkdir("images/".$carpeta);
+                mkdir("images/" . $carpeta);
 
                 # Mensaje
                 $_SESSION['mensaje'] = "Album creado correctamente";
@@ -284,7 +284,7 @@ class Album extends Controller
             $etiquetas = filter_var($_POST['etiquetas'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
             $carpeta = filter_var($_POST['carpeta'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
             # 2. Creamos el objeto alumno a partir de  los datos saneados del  formuario
-            
+
             $album = new classAlbum(
                 null,
                 $titulo,
@@ -315,46 +315,52 @@ class Album extends Controller
             if (strcmp($titulo, $album_orig->titulo) !== 0) {
                 if (empty($titulo)) {
                     $errores['titulo'] = 'El campo titulo es  obligatorio';
-                }else if (strlen($titulo) > 100){
+                } else if (strlen($titulo) > 100) {
                     $errores['titulo'] = "El campo título debe ser inferior a 100 caractéres";
                 }
             }
 
             // Descripcion: obligatorio
             if (strcmp($descripcion, $album_orig->descripcion) !== 0) {
-            if (empty($descripcion)) {
-                $errores['descripcion'] = 'El campo descripcion es  obligatorio';
-            }}
+                if (empty($descripcion)) {
+                    $errores['descripcion'] = 'El campo descripcion es  obligatorio';
+                }
+            }
 
             // Autor: obligatorio
             if (strcmp($autor, $album_orig->autor) !== 0) {
-            if (empty($autor)) {
-                $errores['autor'] = 'El campo autor es  obligatorio';
-            }}
+                if (empty($autor)) {
+                    $errores['autor'] = 'El campo autor es  obligatorio';
+                }
+            }
 
             // fecha: obligatorio
             if (strcmp($fecha, $album_orig->fecha) !== 0) {
-            if (empty($fecha)) {
-                $errores['fecha'] = 'El campo fecha es  obligatorio';
-            }}
+                if (empty($fecha)) {
+                    $errores['fecha'] = 'El campo fecha es  obligatorio';
+                }
+            }
 
             // lugar: obligatorio
             if (strcmp($lugar, $album_orig->lugar) !== 0) {
-            if (empty($lugar)) {
-                $errores['lugar'] = 'El campo lugar es  obligatorio';
-            }}
+                if (empty($lugar)) {
+                    $errores['lugar'] = 'El campo lugar es  obligatorio';
+                }
+            }
 
             // categorias: obligatorio
             if (strcmp($categoria, $album_orig->categoria) !== 0) {
-            if (empty($categoria)) {
-                $errores['categoria'] = 'El campo categoria es  obligatorio';
-            }}
+                if (empty($categoria)) {
+                    $errores['categoria'] = 'El campo categoria es  obligatorio';
+                }
+            }
 
             // categorias: obligatorio
             if (strcmp($carpeta, $album_orig->carpeta) !== 0) {
-            if (empty($carpeta)) {
-                $errores['carpeta'] = 'El campo carpeta es  obligatorio';
-            }}
+                if (empty($carpeta)) {
+                    $errores['carpeta'] = 'El campo carpeta es  obligatorio';
+                }
+            }
 
             # 4. Comprobar  validación
 
@@ -494,9 +500,10 @@ class Album extends Controller
         }
     }
 
-    function upload($param = []){
+    function upload($param = [])
+    {
 
-        sec_session_start();
+        session_start();
 
         if (!isset($_SESSION['id'])) {
             $_SESSION['mensaje'] = "Usuario debe autentificarse";
@@ -506,16 +513,41 @@ class Album extends Controller
             header('location:' . URL . 'album');
         } else {
 
-        // Obtengo objeto de la clase album
-        $album = $this->model->read($param[0]);
+        //     if (isset($_FILES['archivo'])) {
+        //         $carpeta = $param[0];
+        //         if (!empty($carpeta)) {
+        //             $carpetaAlbum = "images/" . $carpeta . "/";
+        //             $nombre = basename($_FILES['archivo']['name']);
+        //             $ruta = $carpetaAlbum . $nombre;
+        //             $extension = strtolower(pathinfo($ruta, PATHINFO_EXTENSION));
+        //             echo($ruta);
+        //             if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']) && $_FILES['archivo']['size'] <= 5242880) {
+        //                 if (move_uploaded_file($_FILES['archivo']['tmp_name'], $ruta)){
+        //                     $_SESSION['mensaje']="Imagen subida con éxito";
+        //                 }else{
+        //                     $_SESSION['mensaje']="La imagen no pudo subirse de manera correcta";
+        //                 }
+        //             } else{
+        //                 $_SESSION['mensaje']="El archivo no se admite. Debe ser JPG, GIF o PNG con tamaño inferior a 5MB";
+        //             }
+        //         }else{
+        //             $_SESSION['mensaje']="Error al subir";
+        //         }
+        //     } else{
+        //         $_SESSION['mensaje']="Seleccione primero algún archivo";
+        //     }
+            // Obtengo objeto de la clase album
+            $album = $this->model->read($param[0]);
 
-        $this->model->subirArchivo($_FILES['archivos'],$album->carpeta);
+            $this->model->uploadFoto($_FILES['archivos'],$album->carpeta);
 
-        $numFotos = count(glob("images/" . $album->carpeta . "/*"));
-        
-        $this->model->contadorFotos($album->id, $numFotos);
+            // $fotos = count(glob("images/" . $album->carpeta . "/*"));
 
-        header("location:" . URL . "album");}
+            // $this->model->countFoto($album->id, $fotos);
+
+            header("location:" . URL . "album");
+            exit();
+        }
 
 
     }
