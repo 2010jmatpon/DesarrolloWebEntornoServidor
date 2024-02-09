@@ -346,52 +346,16 @@ class albumModel extends Model
 
     
     public function uploadFoto($archivo, $carpeta){
+        try {
 
-        // Comprobamos si ha ocurrido algún error de archivo
-        $phpFileUploadErrors = array(
-            UPLOAD_ERR_OK => 'No hay error, el archivo se subió con éxito',
-            UPLOAD_ERR_INI_SIZE => 'El archivo subido excede la directiva upload_max_filesize en php.ini',
-            UPLOAD_ERR_FORM_SIZE => 'El archivo subido excede el MAX_FILE_SIZE especificado en el formulario HTML',
-            UPLOAD_ERR_PARTIAL => 'El archivo subido solo se cargó parcialmente',
-            UPLOAD_ERR_NO_FILE => 'No se subió ningún archivo',
-            UPLOAD_ERR_NO_TMP_DIR => 'Falta la carpeta temporal',
-            UPLOAD_ERR_CANT_WRITE => 'Error al escribir el archivo en el disco.',
-            UPLOAD_ERR_EXTENSION => 'Una extensión de PHP detuvo la carga del archivo.',
-        );
-    
-        // Verificamos si hubo un error durante la carga del archivo
-        if($archivo['error'] != UPLOAD_ERR_OK){
-            $error = $phpFileUploadErrors[$archivo['error']];
-            $_SESSION['error'] = $error;
-            return;
+
+        } catch (PDOException $e) {
+
+            include_once('template/partials/errorDB.php');
+            exit();
+
         }
-    
-        // Validar tamaño máximo 4MB
-        $max_file_size = 4 * 1024 * 1024; // 4MB en bytes
-        if($archivo['size'] > $max_file_size){
-            $_SESSION['error'] = "El archivo excede el tamaño máximo permitido (4MB)";
-            return;
-        }
-    
-        // Validar tipo de archivo
-        $allowed_extensions = array('jpeg', 'jpg', 'gif', 'png');
-        $extension = strtolower(pathinfo($archivo['name'], PATHINFO_EXTENSION));
-        if(!in_array($extension, $allowed_extensions)){
-            $_SESSION['error'] = "Tipo de archivo no permitido. Solo se permiten archivos JPEG, JPG, GIF o PNG.";
-            return;
-        }
-    
-        // Movemos el archivo a la carpeta de destino
-        if(is_uploaded_file($archivo['tmp_name'])){
-            $destino = "images/{$carpeta}/" . $archivo['name'];
-            if(move_uploaded_file($archivo['tmp_name'], $destino)){
-                $_SESSION['mensaje'] = "Archivo subido con éxito";
-            }else{
-                $_SESSION['error'] = "Hubo un error al mover el archivo a la carpeta de destino";
-            }
-        }else{
-            $_SESSION['error'] = "Error al subir el archivo";
-        }
+
     }
     
 

@@ -8,8 +8,9 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Archivo</label>
-                        <input type="file" name="archivo" multiple="multiple">
                         <input type="hidden" name="MAX_FILE_SIZE" value="5242880">
+                        <input type="file" name="archivo[]" multiple="multiple" accept=".png, .jpg, .gif">
+                        
                     </div>
                 </div>
                 <div class="modal-footer">
