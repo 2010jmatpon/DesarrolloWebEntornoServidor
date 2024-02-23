@@ -6,6 +6,7 @@ use PHPMailer\PHPMailer\Exception;
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
+require 'auth.php';
 class Register extends Controller
 {
 
@@ -114,22 +115,20 @@ class Register extends Controller
                 $mail->Encoding = "quoted-printable";
 
                 // Credenciales SMPT gmail
-                $mail->Username = 'jmmp6007@gmail.com';
+                $mail->Username = USERNAME;
 
-                $mail->Password = '';
+                $mail->Password = PASS;
 
 
-                // Configuración SMPT gmail
-                // $mail->SMTPDebug = 2;                                       //Enable verbose debug output
-                $mail->isSMTP();                                            //Send using SMTP
-                $mail->Host = 'smtp.gmail.com';                       //Set the SMTP server to send through
-                $mail->SMTPAuth = true;                                   //Enable SMTP authentication                             //SMTP password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // tls Enable implicit TLS encryption
-                $mail->Port = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                $mail->isSMTP();                                            
+                $mail->Host = 'smtp.gmail.com';                       
+                $mail->SMTPAuth = true;                                   
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         
+                $mail->Port = 587;                                    
 
-                //Cabecera del emial
+                //Cabecera del email
                 $destinatario = $email ;
-                $remitente = 'jmmp6007@gmail.com';
+                $remitente = USERNAME;
                 $asunto = "Nuevo Usuario Gesbank";
                 $mensaje = "
                 <h1>Bienvenido a Gesbank " . $name . "</h1>
@@ -149,11 +148,11 @@ class Register extends Controller
                 <br>
                 El equipo Gesbank.
                 ";
-                $mail->setFrom($remitente, $name);
-                $mail->addAddress($destinatario, 'Juan María');
-                $mail->addReplyTo($remitente, $name);
+                $mail->setFrom($remitente, 'Juan María');
+                $mail->addAddress($destinatario, $name);
+                $mail->addReplyTo($remitente, 'Juan María');
 
-                //Content
+                //Contenido
                 $mail->isHTML(true);
                 $mail->Subject = $asunto;
                 $mail->Body = $mensaje;

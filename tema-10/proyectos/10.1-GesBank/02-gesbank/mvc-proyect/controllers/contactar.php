@@ -6,7 +6,7 @@ use PHPMailer\PHPMailer\Exception;
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
-require 'aut.php';
+require 'auth.php';
 class Contactar extends Controller
 {
 
@@ -14,11 +14,22 @@ class Contactar extends Controller
     {
         session_start();
 
+        if (isset($_SESSION['error'])) {
+            $this->view->error = $_SESSION['error'];
+
+            unset($_SESSION['error']);
+        }
 
         if (isset($_SESSION['errores'])) {
             $this->view->errores = $_SESSION['errores'];
-    
+
             unset($_SESSION['errores']);
+        }
+
+        if (isset($_SESSION['mensaje'])) {
+            $this->view->mensaje = $_SESSION['mensaje'];
+            unset($_SESSION['mensaje']);
+
         }
         $this->view->title = "CONTACTA CON NOSOTROS";
 
@@ -74,28 +85,28 @@ class Contactar extends Controller
                 $mail->Encoding = "quoted-printable";
 
                 // Credenciales SMPT gmail
-                $mail->Username = 'jmmp6007@gmail.com';
+                $mail->Username = USERNAME;
 
-                $mail->Password =  '';
+                $mail->Password = PASS;
 
 
                 // Configuración SMPT gmail
-                $mail->SMTPDebug = 2;                                       //Enable verbose debug output
-                $mail->isSMTP();                                            //Send using SMTP
-                $mail->Host = 'smtp.gmail.com';                       //Set the SMTP server to send through
-                $mail->SMTPAuth = true;                                   //Enable SMTP authentication                             //SMTP password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // tls Enable implicit TLS encryption
-                $mail->Port = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                $mail->SMTPDebug = 2;                                      
+                $mail->isSMTP();                                            
+                $mail->Host = 'smtp.gmail.com';                       
+                $mail->SMTPAuth = true;                                   
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         
+                $mail->Port = 587;                                    
 
-                //Cabecera del emial
-                $destinatario = 'jmmp6007@gmail.com';
+                //Cabecera del email
+                $destinatario = USERNAME;
                 $remitente = $email;
 
                 $mail->setFrom($remitente, $nombre);
                 $mail->addAddress($destinatario, 'Juan María');
                 $mail->addReplyTo($remitente, $nombre);
 
-                //Content
+                //Contenido
                 $mail->isHTML(true);
                 $mail->Subject = $asunto;
                 $mail->Body = $mensaje;
@@ -104,7 +115,8 @@ class Contactar extends Controller
                 $mail->send();
 
                 echo 'Message has been sent';
-                $_SESSION['mensaje'] = "Correo enviado correctamente";
+                $_SESSION['mensaje'] = "Mensaje enviado correctamente";
+
 
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
