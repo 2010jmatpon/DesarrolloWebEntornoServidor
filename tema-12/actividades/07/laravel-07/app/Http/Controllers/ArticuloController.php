@@ -12,51 +12,60 @@ class ArticuloController extends Controller
     public function index()
     {
         $articulos = [
-        
+            (object)
             [
                 'id' => 1,
                 'descripcion'=>'Portátil HP MD12345',
                 'modelo'=>'HP 15-1234-20',
                 'categoria'=> 0,
                 'unidades'=> 12,
-                'precio'=> 550.50
+                'precio_venta'=> 50.50,
+                'precio_coste'=> 550.50
             ],
+            (object)
             [
                 'id' => 2,
                 'descripcion'=>'Tablet - Samsung Galaxy Tab A (2019)',
                 'modelo'=>'Exynos',
                 'categoria'=> 5,
                 'unidades'=> 200,
-                'precio'=> 300
+                'precio_venta'=> 30,
+                'precio_coste'=> 300
             ],
+            (object)
             [
                 'id' => 3,
                 'descripcion'=>'Impresora multifunción - HP',
                 'modelo'=>'DeskJet 3762',
                 'categoria'=> 4,
                 'unidades'=> 2000,
-                'precio'=> 69
+                'precio_venta'=> 6,
+                'precio_coste'=> 60,
             ],
+            (object)
             [
                 'id' => 4,
                 'descripcion'=>'TV LED 40" - Thomson 40FE5606 - Full HD',
                 'modelo'=>'Thomson 40FE5606',
                 'categoria'=> 3,
                 'unidades'=> 300,
-                'precio'=> 259
+                'precio_venta'=> 25,
+                'precio_coste'=> 250,
             ],
+            (object)
             [
                 'id' => 5,
                 'descripcion'=>'PC Sobremesa - Acer Aspire XC-830',
                 'modelo'=>'Acer Aspire XC-830',
                 'categoria'=> 1,
                 'unidades'=> 20,
-                'precio'=> 329
+                'precio_venta'=> 25,
+                'precio_coste'=> 250,
             ]
     
         ];
 
-        return view('articulos.index');
+        return view('articulos.articulos', ['articulos' => $articulos]);
     }
 
     /**
