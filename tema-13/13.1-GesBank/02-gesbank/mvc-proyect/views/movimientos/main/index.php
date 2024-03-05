@@ -4,7 +4,7 @@
 <head>
     <!-- head -->
     <?php require_once("template/partials/head.php");  ?>
-    <title>Cuentas - GESBANK</title>
+    <title>Movimientos - GESBANK</title>
 </head>
 
 <body>
