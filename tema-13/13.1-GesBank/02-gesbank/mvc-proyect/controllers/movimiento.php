@@ -1,6 +1,6 @@
 <?php
 
-class Clientes extends Controller
+class Movimientos extends Controller
 {
 
     # Método principal. Muestra todos los clientes
@@ -26,7 +26,7 @@ class Clientes extends Controller
 
 
             $this->view->title = "Tabla Movimientos";
-            $this->view->clientes = $this->model->get();
+            $this->view->movimientos = $this->model->get();
             $this->view->render("movimientos/main/index");
         }
     }
