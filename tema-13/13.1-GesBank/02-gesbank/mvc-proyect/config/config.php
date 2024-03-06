@@ -2,7 +2,7 @@
 # Configuración básica aplicación MVC
 
 # Ruta absoluta
-define('URL', 'http://localhost/dwes/tema-13/13.1-GesBank/02-gesbank/mvc-proyect/');
+define('URL', 'http://localhost/dwes/DesarrolloWebEntornoServidor/tema-13/proyectos/13.1-GesBank/02-gesbank/mvc-proyect/');
 
 # Constante de la Base de Datos
 define('HOST', 'localhost');

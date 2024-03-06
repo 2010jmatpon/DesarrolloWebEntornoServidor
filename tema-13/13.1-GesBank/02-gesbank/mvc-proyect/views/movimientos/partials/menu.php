@@ -9,9 +9,9 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active <?= in_array($_SESSION['id_rol'], $GLOBALS['clientes']['new']) ?: 'disabled' ?>"
-                        aria-current="page" href="<?= URL ?>cuentas/nuevo">Nuevo</a>
+                        aria-current="page" href="<?= URL ?>movimientos/new">Nuevo</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link active
                     <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['import'])) ?
                         'disabled' : null ?>" href="<?= URL ?>cuentas/importCSV" data-bs-toggle="modal"
@@ -26,25 +26,25 @@
                     <a class="nav-link active
                     <?= in_array($_SESSION['id_rol'], $GLOBALS['clientes']['export']) ?: 'disabled' ?>"
                         href="<?= URL ?>cuentas/pdf">Exportar PDF</a>
-                </li>
+                </li> -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false" <?= in_array($_SESSION['id_rol'], $GLOBALS['clientes']['order']) ?: 'disabled' ?>>
                         Ordenar
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="<?= URL ?>cuentas/ordenar/1">Id</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cuentas/ordenar/2">Nº de cuenta</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cuentas/ordenar/8">Titular</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cuentas/ordenar/4">Fecha</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cuentas/ordenar/5">Fecha Ult. Mov.</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cuentas/ordenar/6">Nº Movimientos</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cuentas/ordenar/7">saldo</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>movimientos/ordenar/1">Id</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>movimientos/ordenar/8">Cuenta</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>movimientos/ordenar/3">Fecha</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>movimientos/ordenar/4">Concepto</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>movimientos/ordenar/5">Tipo</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>movimientos/ordenar/6">Cantidad</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>movimientos/ordenar/7">Saldo</a></li>
                     </ul>
                 </li>
 
             </ul>
-            <form class="d-flex" method="get" action="<?= URL ?>cuentas/buscar">
+            <form class="d-flex" method="get" action="<?= URL ?>movimientos/buscar">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
                     name="expresion">
                 <button

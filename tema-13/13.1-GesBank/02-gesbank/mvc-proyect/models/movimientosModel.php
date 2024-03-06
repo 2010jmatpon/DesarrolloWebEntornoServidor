@@ -44,40 +44,69 @@ class movimientosModel extends Model
 
     # Método create
     # Ejecuta INSERT sobre la tabla cuentas
-    public function create($cuenta)
+    public function create($movimiento, $id)
     {
         try {
             $sql = " 
                     INSERT INTO 
-                        cuentas (
-                                    num_cuenta,
-                                    id_cliente,
-                                    fecha_alta,
-                                    fecha_ul_mov,
-                                    num_movtos,
-                                    saldo
+                        movimientos (
+                                    id_cuenta,
+                                    fecha_hora,
+                                    concepto,
+                                    tipo,
+                                    cantidad
                                 ) VALUES ( 
-                                    :num_cuenta,
-                                    :id_cliente,
-                                    :fecha_alta,
-                                    :fecha_ul_mov,
-                                    :num_movtos,
-                                    :saldo
+                                    :id_cuenta,
+                                    :fecha_hora,
+                                    :concepto,
+                                    :tipo,
+                                    :cantidad
                                 )";
 
             $conexion = $this->db->connect();
             $pdoSt = $conexion->prepare($sql);
 
             //Bindeamos parametros
-            $pdoSt->bindParam(":num_cuenta", $cuenta->num_cuenta, PDO::PARAM_INT);
-            $pdoSt->bindParam(":id_cliente", $cuenta->id_cliente, PDO::PARAM_INT);
-            $pdoSt->bindParam(":fecha_alta", $cuenta->fecha_alta);
-            $pdoSt->bindParam(":fecha_ul_mov", $cuenta->fecha_ul_mov);
-            $pdoSt->bindParam(":num_movtos", $cuenta->num_movtos, PDO::PARAM_INT);
-            $pdoSt->bindParam(":saldo", $cuenta->saldo, PDO::PARAM_INT);
+            $pdoSt->bindParam(":id_cuenta", $movimiento->id_cuenta, PDO::PARAM_INT);
+            $pdoSt->bindParam(":fecha_hora", $movimiento->fecha_hora);
+            $pdoSt->bindParam(":concepto", $movimiento->concepto, PDO::PARAM_STR);
+            $pdoSt->bindParam(":tipo", $movimiento->tipo, PDO::PARAM_INT);
+            $pdoSt->bindParam(":cantidad", $movimiento->cantidad, PDO::PARAM_INT);
+
+            $pdoSt_saldoCuenta = "
+                                    UPDATE cuentas
+                                        SET
+                                            saldo = saldo + :cantidad,
+                                            num_movtos = num_movtos + 1,
+                                            fecha_ul_mov=now()
+                                        WHERE
+                                            id=:id";
+            $pdoSt_saldoCuenta = $conexion->prepare($pdoSt_saldoCuenta);
+            $pdoSt_saldoCuenta->bindParam(":cantidad", $movimiento->cantidad, PDO::PARAM_INT);
+            $pdoSt_saldoCuenta->bindParam(":id", $id, PDO::PARAM_INT);
+
+
+            $pdoSt_saldoMov = "
+                                UPDATE movimientos
+                                    SET
+                                        saldo = (SELECT
+                                                    saldo
+                                                FROM
+                                                    cuentas
+                                                WHERE
+                                                    id=:id)
+                                    ORDER BY
+                                        id
+                                    DESC
+                                    LIMIT
+                                        1";
+            $pdoSt_saldoMov = $conexion->prepare($pdoSt_saldoMov);
+            $pdoSt_saldoMov->bindParam(":id", $id, PDO::PARAM_INT);
 
             // ejecuto
             $pdoSt->execute();
+            $pdoSt_saldoCuenta->execute();
+            $pdoSt_saldoMov->execute();
         } catch (PDOException $e) {
             require_once("template/partials/errorDB.php");
             exit();
@@ -86,17 +115,17 @@ class movimientosModel extends Model
 
     # Método getClientes
     # Realiza un SELECT sobre la tabla clientes para generar la lista select dinámica de clientes
-    public function getClientes()
+    public function getCuentas()
     {
         try {
 
             $sql = " 
                 SELECT 
                     id,
-                    concat_ws(', ', apellidos, nombre) cliente
+                    num_cuenta as cuenta
                 FROM 
-                    clientes
-                ORDER BY apellidos, nombre;
+                    cuentas
+                ORDER BY num_cuenta;
                 ";
 
             $conexion = $this->db->connect();
@@ -109,22 +138,25 @@ class movimientosModel extends Model
             exit();
         }
     }
-
-    # Método delete
-    # Permite eliminar una cuenta, ejecuta DELETE 
-    public function delete($id)
+    public function getSaldo($id_cuenta)
     {
         try {
-            $sql = " 
-                   DELETE FROM cuentas WHERE id=:id;
-                   ";
-
+            $sql = "
+                SELECT
+                    id,
+                    saldo 
+                FROM 
+                    cuentas 
+                WHERE 
+                    id = :id_cuenta";
             $conexion = $this->db->connect();
             $pdoSt = $conexion->prepare($sql);
-            $pdoSt->bindParam(":id", $id, PDO::PARAM_INT);
+            $pdoSt->bindParam(":id_cuenta", $id_cuenta, PDO::PARAM_INT);
+            $pdoSt->fetch(PDO::FETCH_ASSOC);
             $pdoSt->execute();
+
             return $pdoSt;
-        } catch (PDOException $error) {
+        } catch (PDOException $e) {
             require_once("template/partials/errorDB.php");
             exit();
         }
@@ -132,21 +164,21 @@ class movimientosModel extends Model
 
     # Método getCuenta
     # Permite obtener los detalles de una cuenta a partir del id
-    public function getCuenta($id)
+    public function getMovimiento($id)
     {
         try {
 
             $sql = " 
                     SELECT 
-                        c.id,
-                        c.num_cuenta,
-                        c.id_cliente,
-                        c.fecha_alta,
-                        c.fecha_ul_mov,
-                        c.num_movtos,
-                        c.saldo
+                        m.id,
+                        m.id_cuenta,
+                        m.fecha_hora,
+                        m.concepto,
+                        m.tipo,
+                        m.cantidad,
+                        m.saldo
                     FROM 
-                        cuentas as c 
+                        movimientos as m 
                     WHERE
                         id=:id;";
 
@@ -163,42 +195,6 @@ class movimientosModel extends Model
         }
     }
 
-    # Método update
-    # Actualiza los detalles de una cuenta, sólo permite modificar el cliente o titular
-    public function update(classCuenta $cuenta, $id)
-    {
-        try {
-
-            $sql = " 
-                    UPDATE cuentas SET
-                        num_cuenta = :num_cuenta,
-                        id_cliente = :id_cliente,
-                        fecha_alta = :fecha_alta,
-                        fecha_ul_mov = :fecha_ul_mov,
-                        num_movtos = :num_movtos,
-                        saldo=:saldo,
-                        update_at = now()
-                    WHERE
-                        id=:id";
-
-            $conexion = $this->db->connect();
-            $pdoSt = $conexion->prepare($sql);
-            //Vinculamos los parámetros
-            $pdoSt->bindParam(":num_cuenta", $cuenta->num_cuenta, PDO::PARAM_STR, 20);
-            $pdoSt->bindParam(":id_cliente", $cuenta->id_cliente, PDO::PARAM_INT);
-            $pdoSt->bindParam(":fecha_alta", $cuenta->fecha_alta, PDO::PARAM_STR);
-            $pdoSt->bindParam(":fecha_ul_mov", $cuenta->fecha_ul_mov, PDO::PARAM_STR);
-            $pdoSt->bindParam(":num_movtos", $cuenta->num_movtos, PDO::PARAM_INT);
-            $pdoSt->bindParam(":saldo", $cuenta->saldo, PDO::PARAM_INT);
-            $pdoSt->bindParam(":id", $id, PDO::PARAM_INT);
-
-            $pdoSt->execute();
-        } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
-            exit();
-        }
-    }
-
 
 
     # Método order
@@ -208,20 +204,19 @@ class movimientosModel extends Model
         try {
 
             $sql = " 
-                SELECT 
-                    c.id,
-                    c.num_cuenta,
-                    c.id_cliente,
-                    c.fecha_alta,
-                    c.fecha_ul_mov,
-                    c.num_movtos,
-                    c.saldo,
-                    concat_ws(', ', cl.apellidos, cl.nombre) as cliente
-                FROM 
-                    cuentas AS c INNER JOIN clientes as cl 
-                    ON c.id_cliente=cl.id 
-                ORDER BY
-                    :criterio ";
+            SELECT 
+            m.id,
+            m.id_cuenta,
+            m.fecha_hora,
+            m.concepto,
+            m.tipo,
+            m.cantidad,
+            m.saldo,
+            c.num_cuenta as cuenta
+        FROM 
+            movimientos as m INNER JOIN cuentas as c
+            ON m.id_cuenta = c.id 
+        ORDER BY  :criterio; ";
 
             $conexion = $this->db->connect();
             $pdoSt = $conexion->prepare($sql);
@@ -243,28 +238,27 @@ class movimientosModel extends Model
         try {
 
             $sql = "
-                    SELECT 
-                        c.id,
-                        c.num_cuenta,
-                        c.id_cliente,
-                        c.fecha_alta,
-                        c.fecha_ul_mov,
-                        c.num_movtos,
-                        c.saldo,
-                        concat_ws(', ', cl.apellidos, cl.nombre) as cliente
-                    FROM 
-                        cuentas as c INNER JOIN clientes as cl 
-                        ON c.id_cliente=cl.id
+            SELECT 
+                m.id,
+                m.id_cuenta,
+                m.fecha_hora,
+                m.concepto,
+                m.tipo,
+                m.cantidad,
+                m.saldo,
+                c.num_cuenta as cuenta
+            FROM 
+                movimientos as m INNER JOIN cuentas as c
+                ON m.id_cuenta = c.id 
                     WHERE 
                         concat_ws(  ' ',
-                                    c.num_cuenta,
-                                    c.id_cliente,
-                                    c.fecha_alta,
-                                    c.fecha_ul_mov,
-                                    c.num_movtos,
-                                    c.saldo,
-                                    cl.nombre,
-                                    cl.apellidos
+                        m.id_cuenta,
+                        m.fecha_hora,
+                        m.concepto,
+                        m.tipo,
+                        m.cantidad,
+                        m.saldo,
+                        c.num_cuenta
                                 )
                     LIKE
                         :expresion ";
@@ -288,22 +282,22 @@ class movimientosModel extends Model
 
     # Método getCliente
     # Obtiene los detalles de un cliente a partir del id
-    public function getCliente($id)
+    public function getCuenta($id)
     {
         try {
             $sql = " 
-                    SELECT     
-                        id,
-                        apellidos,
-                        nombre,
-                        telefono,
-                        ciudad,
-                        dni,
-                        email
-                    FROM  
-                        clientes  
-                    WHERE
-                        id = :id";
+            SELECT 
+            c.id,
+            c.num_cuenta,
+            c.id_cliente,
+            c.fecha_alta,
+            c.fecha_ul_mov,
+            c.num_movtos,
+            c.saldo
+        FROM 
+            cuentas as c 
+        WHERE
+            id=:id;";
 
             $conexion = $this->db->connect();
             $pdoSt = $conexion->prepare($sql);
@@ -317,7 +311,8 @@ class movimientosModel extends Model
         }
     }
 
-    public function validateUniqueCuenta($num_cuenta){
+    public function validateUniqueCuenta($num_cuenta)
+    {
         try {
             // Creamos la consulta
             $sql = "SELECT * FROM cuentas  WHERE num_cuenta = :num_cuenta";
@@ -327,58 +322,23 @@ class movimientosModel extends Model
             $pdost = $conexion->prepare($sql);
 
             // Vinculamos la variable
-            $pdost->bindParam(':num_cuenta',$num_cuenta,PDO::PARAM_STR);
+            $pdost->bindParam(':num_cuenta', $num_cuenta, PDO::PARAM_STR);
 
             // Ejecutamos la sentencia
             $pdost->execute();
 
-            if($pdost->rowCount()!=0){
+            if ($pdost->rowCount() != 0) {
                 return false;
 
             }
             return true;
-        } catch (PDOException $e){
-
-            include_once('template/partials/errorDB.php');
-            exit();
-            
-        }
-     }
-
-     public function read($id)
-    {
-
-        try {
-            $sql = " SELECT 
-                id,
-                num_cuenta,
-                id_cliente,
-                fecha_alta,
-                fecha_ul_mov,
-                num_movtos,
-                saldo
-                
-            FROM 
-                cuentas
-        WHERE id =  :id;
-                ";
-
-            # Conectar con la base de datos
-            $conexion = $this->db->connect();
-
-
-            $pdoSt = $conexion->prepare($sql);
-
-            $pdoSt->bindParam(':id', $id, PDO::PARAM_INT);
-            $pdoSt->setFetchMode(PDO::FETCH_OBJ);
-            $pdoSt->execute();
-
-            return $pdoSt->fetch();
-
         } catch (PDOException $e) {
+
             include_once('template/partials/errorDB.php');
             exit();
-        }
 
+        }
     }
+
+
 }

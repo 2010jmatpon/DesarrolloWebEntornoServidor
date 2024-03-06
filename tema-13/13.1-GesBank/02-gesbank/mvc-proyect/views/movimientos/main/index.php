@@ -46,19 +46,17 @@
                         <td class="text-end"><?= number_format($movimiento->cantidad, 2, ',', '.')?></td>
                         <td class="text-end"><?= number_format($movimiento->saldo, 2, ',', '.')?> €</td>
                         <td style="display:flex; justify-content:space-between;">
-                            <a href="<?= URL ?>movimientos/delete/<?= $movimiento->id ?>" title="Eliminar" onclick="return confirm('Confirmar eliminación Cuenta') " class="btn btn-danger" <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['delete'])) ?
-                                    'disabled' : null ?>> <i class="bi bi-trash"></i> </a>
                             <a href="<?= URL ?>movimientos/mostrar/<?= $movimiento->id ?>" title="Mostrar" class="btn btn-warning<?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['show'])) ?
                                     'disabled' : null ?>"> <i class="bi bi-eye"></i> </a>
-                            <a href="<?= URL ?>cuentas/exportCSV/<?= $cuenta->id ?>" title="Exportar" class="btn btn-success"
-                            > <i class="bi bi-arrows-expand-vertical"></i> </a>
+                            <!-- <a href="<?= URL ?>cuentas/exportCSV/<?= $cuenta->id ?>" title="Exportar" class="btn btn-success"
+                            > <i class="bi bi-arrows-expand-vertical"></i> </a> -->
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="9">Nº Registros: <?= $this->cuentas->rowCount() ?> </td>
+                    <td colspan="9">Nº Registros: <?= $this->movimientos->rowCount() ?> </td>
                 </tr>
             </tfoot>
 

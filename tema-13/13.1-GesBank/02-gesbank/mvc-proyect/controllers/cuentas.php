@@ -582,4 +582,29 @@ class Cuentas extends Controller
 
         }
     }
+
+    public function renderMoves($param = []){
+        session_start();
+        if (!isset($_SESSION['id'])) {
+            $_SESSION['notify'] = "Usuario sin autentificar";
+
+            header("location:" . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+            $_SESSION['mensaje'] = "Usuario sin autentificar";
+            header("location:" . URL . "index");
+
+        } else {
+            #comprobar si existe mensaje
+            if (isset($_SESSION['mensaje'])) {
+                $this->view->mensaje = $_SESSION['mensaje'];
+                unset($_SESSION['mensaje']);
+
+            }
+
+            $id_cuenta = $param[0];
+            $this->view->title = "Tabla Movimientos";
+            $this->view->movimientos = $this->model->getMovimiento($id_cuenta);
+            $this->view->render("cuentas/moves/index");
+        }
+    }
 }

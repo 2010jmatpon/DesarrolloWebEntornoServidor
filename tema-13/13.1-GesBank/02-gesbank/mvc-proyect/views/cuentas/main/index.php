@@ -54,6 +54,8 @@
                                     'disabled' : null ?>"> <i class="bi bi-eye"></i> </a>
                             <a href="<?= URL ?>cuentas/exportCSV/<?= $cuenta->id ?>" title="Exportar" class="btn btn-success"
                             > <i class="bi bi-arrows-expand-vertical"></i> </a>
+                            <a href="<?= URL ?>cuentas/renderMoves/<?= $cuenta->id ?>" title="Movimientos" class="btn btn-dark"
+                            > <i class="bi bi-activity"></i> </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

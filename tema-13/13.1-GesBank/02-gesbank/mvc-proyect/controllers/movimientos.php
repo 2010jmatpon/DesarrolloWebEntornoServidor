@@ -32,7 +32,7 @@ class Movimientos extends Controller
     }
 
     # Método nuevo. Muestra formulario añadir cliente
-    public function nuevo($param = [])
+    public function new($param = [])
     {
         # Continuamos la sesion
         session_start();
@@ -45,7 +45,7 @@ class Movimientos extends Controller
 
         } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['new']))) {
             $_SESSION['mensaje'] = "Operación sin privilegio";
-            header("location:" . URL . "clientes");
+            header("location:" . URL . "movimientos");
         } else {
 
             # Creamos un objeto vacio
@@ -89,7 +89,7 @@ class Movimientos extends Controller
 
         } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['new']))) {
             $_SESSION['mensaje'] = "Operación sin privilegio";
-            header("location:" . URL . "cuentas");
+            header("location:" . URL . "movimientos");
         } else {
             #1.Seguridad. Saneamos los datos del formulario
             $id_cuenta = filter_var($_POST['id_cuenta'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -97,13 +97,29 @@ class Movimientos extends Controller
             $concepto = filter_var($_POST['concepto'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
             $tipo = filter_var($_POST['tipo'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
             $cantidad = filter_var($_POST['cantidad'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
+
+            ######################
+            #OPTIMIZAR ESTA PARTE#
+            ######################
+
+            $cuenta = $this->model->getSaldo($id_cuenta);
+            if ($tipo == 'R') {
+
+                if ($cantidad > $cuenta) {
+                    $errores['cantidad'] = 'El reintegro no puede ser superior a su saldo';
+                }
+                $cantidad = "-" . $cantidad;
+                $cantidad = floatval($cantidad);
+
+            }
+
             $saldo = filter_var($_POST['saldo'] ??= '', FILTER_SANITIZE_EMAIL);
 
             #2. Creamos cliente con los datos saneados
             $movimiento = new classMovimiento(
                 null,
                 $id_cuenta,
-                $fecha_hora,
+                date("Y-m-d H:i:s"),
                 $concepto,
                 $tipo,
                 $cantidad,
@@ -115,12 +131,27 @@ class Movimientos extends Controller
             #3.Validacion
             $errores = [];
 
-            //Cliente. Obligatorio, valor numérico, ha de existir en la tabla clientes.
             if (empty($id_cuenta)) {
                 $errores['id_cuenta'] = 'El campo cuenta es obligatorio';
             } else if (!filter_var($id_cuenta, FILTER_VALIDATE_INT)) {
-                $errores['id_cuenta'] = 'Cliente no valido';
+                $errores['id_cuenta'] = 'Cuenta no válida';
             }
+
+            //Nombre: obligatorio, maximo 20 caracteres
+            if (empty($concepto)) {
+                $errores['concepto'] = 'El campo concepto es obligatorio';
+            } else if (strlen($concepto) > 50) {
+                $errores['concepto'] = 'El campo concepto es demasiado largo';
+
+            }
+
+            if (empty($cantidad)) {
+                $errores['cantidad'] = 'El campo cantidad es obligatorio';
+            }
+            // if($tipo == 'R' && $cantidad > $saldo){
+            //     $errores['cantidad'] = 'El reintegro mo puede ser superior a su saldo';
+            // }
+
 
             if (!empty($errores)) {
                 //errores de validacion
@@ -131,7 +162,7 @@ class Movimientos extends Controller
                 header('location:' . URL . 'movimientos/new');
 
             } else {
-                $this->model->create($movimiento);
+                $this->model->create($movimiento, $id_cuenta);
                 #Mensaje
                 $_SESSION['mensaje'] = "Movimiento creado    correctamente";
                 header("Location:" . URL . "movimientos");
@@ -153,12 +184,13 @@ class Movimientos extends Controller
 
         } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['show']))) {
             $_SESSION['mensaje'] = "Operación sin privilegio";
-            header("location:" . URL . "clientes");
+            header("location:" . URL . "movimientos");
         } else {
             $id = $param[0];
-            $this->view->title = "Formulario Cliente Mostar";
-            $this->view->cliente = $this->model->getCliente($id);
-            $this->view->render("clientes/mostrar/index");
+            $this->view->title = "Formulario Movimiento Mostar";
+            $this->view->movimiento = $this->model->getMovimiento($id);
+            $this->view->cuenta = $this->model->getCuenta($this->view->movimiento->id_cuenta);
+            $this->view->render("movimientos/show/index");
         }
     }
 
@@ -174,12 +206,12 @@ class Movimientos extends Controller
 
         } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['order']))) {
             $_SESSION['mensaje'] = "Operación sin privilegio";
-            header("location:" . URL . "clientes");
+            header("location:" . URL . "movimientos");
         } else {
             $criterio = $param[0];
-            $this->view->title = "Tabla Clientes";
-            $this->view->clientes = $this->model->order($criterio);
-            $this->view->render("clientes/main/index");
+            $this->view->title = "Tabla Movimientos";
+            $this->view->movimientos = $this->model->order($criterio);
+            $this->view->render("movimientos/main/index");
         }
 
     }
@@ -197,18 +229,14 @@ class Movimientos extends Controller
 
         } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['filter']))) {
             $_SESSION['mensaje'] = "Operación sin privilegio";
-            header("location:" . URL . "clientes");
+            header("location:" . URL . "movimientos");
         } else {
             $expresion = $_GET["expresion"];
-            $this->view->title = "Tabla Clientes";
-            $this->view->clientes = $this->model->filter($expresion);
-            $this->view->render("clientes/main/index");
+            $this->view->title = "Tabla Movimientos";
+            $this->view->movimientos = $this->model->filter($expresion);
+            $this->view->render("movimientos/main/index");
         }
     }
 
 
 }
-
-
-
-
