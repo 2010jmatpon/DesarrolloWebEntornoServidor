@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('name', 35);
             $table->string('lastname', 35);
             $table->date('birth_date');
-            $table->char('phone', 13)->nullable(false);
+            $table->char('phone', 20)->nullable(false);
             $table->string('city', 200);
             $table->char('dni', 9)->unique()->nullable(false);
             $table->string('email', 35)->unique();
