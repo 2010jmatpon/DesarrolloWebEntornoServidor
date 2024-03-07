@@ -20,7 +20,7 @@
           <a class="nav-link active" aria-current="page" href="<?=URL?>movimientos/">Movimientos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="<?=URL?>userController/">Usuarios</a>
+          <a class="nav-link active <?= in_array($_SESSION['id_rol'], $GLOBALS['users']['users']) ?: 'disabled' ?>" aria-current="page" href="<?=URL?>users/"  >Usuarios</a>
         </li>
       </ul>
       <div class="d-flex">

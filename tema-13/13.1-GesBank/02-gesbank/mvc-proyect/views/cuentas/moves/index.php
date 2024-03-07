@@ -65,18 +65,14 @@
                     <td colspan="9">Nº Registros:
                         <?= count($this->movimientos) ?>
                     </td>
-                    </td>
                 </tr>
             </tfoot>
 
         </table>
         <div class="mb-3">
-
-            <a name="" id="" class="btn btn-secondary" href="<?= URL ?>cuentas" role="button">Volver <i class="bi bi-arrow-90deg-left"></i></a>
-
-
+            <a name="" id="" class="btn btn-secondary" href="<?= URL ?>cuentas" role="button">Volver <i
+                    class="bi bi-arrow-90deg-left"></i></a>
         </div>
-
     </div>
 
     <!-- footer -->
