@@ -11,22 +11,6 @@
                     <a class="nav-link active <?= in_array($_SESSION['id_rol'], $GLOBALS['clientes']['new']) ?: 'disabled' ?>"
                         aria-current="page" href="<?= URL ?>movimientos/new">Nuevo</a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link active
-                    <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['import'])) ?
-                        'disabled' : null ?>" href="<?= URL ?>cuentas/importCSV" data-bs-toggle="modal"
-                        data-bs-target="#importar">Importar CSV</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active
-                    <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['export'])) ?
-                        'disabled' : null ?>" href="<?= URL ?>cuentas/exportAllCSV">Exportar CSV</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active
-                    <?= in_array($_SESSION['id_rol'], $GLOBALS['clientes']['export']) ?: 'disabled' ?>"
-                        href="<?= URL ?>cuentas/pdf">Exportar PDF</a>
-                </li> -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false" <?= in_array($_SESSION['id_rol'], $GLOBALS['clientes']['order']) ?: 'disabled' ?>>

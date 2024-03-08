@@ -15,7 +15,7 @@
         <!-- cabecera o titulo -->
         <?php include "views/cuentas/partials/header.php" ?>
         <!-- Menu principal -->
-        <?php require_once "views/cuentas/partials/menu.php" ?>
+        <?php require_once "views/cuentas/partials/menuMovs.php" ?>
         <!-- Mensaje -->
         <?php require_once "template/partials/mensaje.php" ?>
         <table class="table">
