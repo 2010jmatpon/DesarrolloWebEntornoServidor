@@ -55,10 +55,12 @@
                                 onclick="return confirm('Confirmar eliminación Usuario') " class="btn btn-danger"
                                 <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['delete'])) ?
                                     'disabled' : null ?>> <i class="bi bi-trash"></i> </a>
-                            <a href="<?= URL ?>users/editar/<?= $user->id ?>" title="Editar" class="btn btn-primary <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['edit'])) ?
+                            <a href="<?= URL ?>users/edit/<?= $user->id ?>" title="Editar" class="btn btn-primary <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['edit'])) ?
                                     'disabled' : null ?>"> <i class="bi bi-pencil"></i> </a>
-                            <!-- <a href="<?= URL ?>cuentas/mostrar/<?= $cuenta->id ?>" title="Mostrar" class="btn btn-warning<?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['show'])) ?
-                                    'disabled' : null ?>"> <i class="bi bi-eye"></i> </a> -->
+                            <a href="<?= URL ?>users/editPass/<?= $user->id ?>" title="Editar Password" class="btn btn-dark <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['edit'])) ?
+                                    'disabled' : null ?>"> <i class="bi bi-braces-asterisk"></i> </a>
+                            <a href="<?= URL ?>users/mostrar/<?= $user->id ?>" title="Mostrar" class="btn btn-warning<?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['show'])) ?
+                                    'disabled' : null ?>"> <i class="bi bi-eye"></i> </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

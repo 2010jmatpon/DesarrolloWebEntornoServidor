@@ -1,15 +1,11 @@
 <?php
 
-/*
-    Modelo cuentasModel
-*/
 
 
 class movimientosModel extends Model
 {
 
-    # Método get
-    # consulta SELECT sobre la tabla cuentas y clientes
+
     public function get()
     {
         try {
@@ -42,8 +38,6 @@ class movimientosModel extends Model
         }
     }
 
-    # Método create
-    # Ejecuta INSERT sobre la tabla cuentas
     public function create($movimiento, $id)
     {
         try {
@@ -113,8 +107,6 @@ class movimientosModel extends Model
         }
     }
 
-    # Método getClientes
-    # Realiza un SELECT sobre la tabla clientes para generar la lista select dinámica de clientes
     public function getCuentas()
     {
         try {
@@ -162,8 +154,6 @@ class movimientosModel extends Model
         }
     }
 
-    # Método getCuenta
-    # Permite obtener los detalles de una cuenta a partir del id
     public function getMovimiento($id)
     {
         try {
@@ -197,8 +187,6 @@ class movimientosModel extends Model
 
 
 
-    # Método order
-    # Permite ordenar la tabla por cualquiera de las columnas de la tabla
     public function order(int $criterio)
     {
         try {
@@ -231,8 +219,6 @@ class movimientosModel extends Model
     }
 
 
-    # Método filter
-    # Permite filtrar la tabla cuentas a partir de una expresión de búsqueda o filtrado
     public function filter($expresion)
     {
         try {
@@ -280,8 +266,6 @@ class movimientosModel extends Model
         }
     }
 
-    # Método getCliente
-    # Obtiene los detalles de un cliente a partir del id
     public function getCuenta($id)
     {
         try {
@@ -340,5 +324,30 @@ class movimientosModel extends Model
         }
     }
 
-
+    // public function validateReintegro($id_cuenta, $cantidad)
+    // {
+    //     try {
+    //         $sql = "
+    //             SELECT saldo 
+    //             FROM cuentas 
+    //             WHERE id = :id_cuenta";
+            
+    //         $conexion = $this->db->connect();
+    //         $pdoSt = $conexion->prepare($sql);
+    //         $pdoSt->bindParam(":id_cuenta", $id_cuenta, PDO::PARAM_INT);
+    //         $pdoSt->execute();
+    
+    //         $saldo = $pdoSt->fetchColumn();
+    
+    //         if ($saldo >= $cantidad) {
+    //             return true;
+    //         } else {
+    //             return false;
+    //         }
+    //     } catch (PDOException $e) {
+    //         require_once("template/partials/errorDB.php");
+    //         exit();
+    //     }
+    // }
+    
 }

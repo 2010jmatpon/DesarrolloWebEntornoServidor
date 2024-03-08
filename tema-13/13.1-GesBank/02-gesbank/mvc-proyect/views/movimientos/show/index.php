@@ -8,30 +8,26 @@
 
 <body>
     <!-- menú principal superior -->
-    <?php require_once "template/partials/menu.php"; ?>
+    <?php require_once "template/partials/menuAut.php"; ?>
     <!-- capa principal -->
     <div class="container">
         <!-- cabecera o título -->
         <?php include "views/movimientos/partials/header.php" ?>
         <!-- formulario solo lectura -->
         <form>
-            <!-- Número de cuenta -->
             <div class="mb-3">
                 <label for="" class="form-label">Cuenta</label>
                 <input type="text" class="form-control" value="<?= $this->cuenta->num_cuenta ?>" disabled>
             </div>
 
-            <!-- fecha alta -->
             <div class="mb-3">
                 <label for="" class="form-label">Fecha Hora</label>
                 <input type="datetime" class="form-control" name="fecha_hora" value="<?= $this->movimiento->fecha_hora ?>" disabled>
             </div>
-            <!-- titular o cliente -->
             <div class="mb-3">
                 <label for="" class="form-label">Concepto</label>
                 <input type="text" class="form-control" value="<?= $this->movimiento->concepto?>" disabled>
             </div>
-            <!-- Número de movimientos -->
             <div class="mb-3">
                 <label for="" class="form-label">Cantidad</label>
                 <input type="float" class="form-control" name="cantidad" id="" value="<?= $this->movimiento->cantidad ?>" disabled>

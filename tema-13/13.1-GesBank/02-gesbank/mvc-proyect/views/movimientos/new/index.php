@@ -17,17 +17,14 @@
         <!-- formulario -->
         <form action="<?= URL ?>movimientos/create" method="POST">
 
-            <!-- Cliente -->
             <div class="mb-3">
                 <label for="" class="form-label">Cuenta</label>
                 <select class="form-select" name="id_cuenta" id="">
                     <option selected disabled>Seleccione una cuenta </option>
                     <?php foreach ($this->movimientos as $cuenta): ?>
-                        <!-- <div class="form-check"> -->
                         <option value="<?= $cuenta->id ?>">
                             <?= $cuenta->cuenta ?>
                         </option>
-                        <!-- </div> -->
                     <?php endforeach; ?>
                 </select>
                 <?php if (isset($this->errores['id_cuenta'])): ?>
@@ -47,7 +44,6 @@
                     </span>
                 <?php endif; ?>
             </div>
-            <!-- Cuenta -->
             <div class="mb-3">
                 <label for="" class="form-label">Concepto</label>
                 <input type="text" class="form-control" name="concepto" maxlength="50">
@@ -74,7 +70,7 @@
                 </div>
             </div>
 
-            <!-- Saldo -->
+            <!-- Cantidad -->
             <div class="mb-3">
                 <label for="" class="form-label">Cantidad</label>
                 <input type="float" class="form-control" name="cantidad" id="" placeholder="0">

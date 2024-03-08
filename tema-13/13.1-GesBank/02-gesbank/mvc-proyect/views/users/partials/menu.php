@@ -18,18 +18,15 @@
                         Ordenar
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="<?= URL ?>cuentas/ordenar/1">Id</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cuentas/ordenar/2">Nº de cuenta</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cuentas/ordenar/8">Titular</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cuentas/ordenar/4">Fecha</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cuentas/ordenar/5">Fecha Ult. Mov.</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cuentas/ordenar/6">Nº Movimientos</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cuentas/ordenar/7">saldo</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>users/ordenar/1">Id</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>users/ordenar/2">Nombre Usuario</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>users/ordenar/3">Email</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>users/ordenar/5">Rol</a></li>
                     </ul>
                 </li>
 
             </ul>
-            <form class="d-flex" method="get" action="<?= URL ?>cuentas/buscar">
+            <form class="d-flex" method="get" action="<?= URL ?>users/buscar">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
                     name="expresion">
                 <button

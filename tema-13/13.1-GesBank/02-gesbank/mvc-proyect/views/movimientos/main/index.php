@@ -3,7 +3,7 @@
 
 <head>
     <!-- head -->
-    <?php require_once("template/partials/head.php");  ?>
+    <?php require_once("template/partials/head.php"); ?>
     <title>Movimientos - GESBANK</title>
 </head>
 
@@ -34,29 +34,44 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($this->movimientos as $movimiento) : ?>
+                <?php foreach ($this->movimientos as $movimiento): ?>
                     <?php require_once "template/partials/modalCuentas.php"; ?>
 
                     <tr>
-                        <td><?= $movimiento->id ?></td>
-                        <td><?= $movimiento->cuenta ?></td>
-                        <td><?= $movimiento->concepto ?></td>
-                        <td><?= $movimiento->fecha_hora ?></td>
-                        <td><?= $movimiento->tipo ?></td>
-                        <td class="text-end"><?= number_format($movimiento->cantidad, 2, ',', '.')?></td>
-                        <td class="text-end"><?= number_format($movimiento->saldo, 2, ',', '.')?> €</td>
+                        <td>
+                            <?= $movimiento->id ?>
+                        </td>
+                        <td>
+                            <?= $movimiento->cuenta ?>
+                        </td>
+                        <td>
+                            <?= $movimiento->concepto ?>
+                        </td>
+                        <td>
+                            <?= $movimiento->fecha_hora ?>
+                        </td>
+                        <td>
+                            <?= $movimiento->tipo ?>
+                        </td>
+                        <td class="text-end">
+                            <?= number_format($movimiento->cantidad, 2, ',', '.') ?>
+                        </td>
+                        <td class="text-end">
+                            <?= number_format($movimiento->saldo, 2, ',', '.') ?> €
+                        </td>
                         <td style="display:flex; justify-content:space-between;">
                             <a href="<?= URL ?>movimientos/mostrar/<?= $movimiento->id ?>" title="Mostrar" class="btn btn-warning<?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['show'])) ?
                                     'disabled' : null ?>"> <i class="bi bi-eye"></i> </a>
-                            <!-- <a href="<?= URL ?>cuentas/exportCSV/<?= $cuenta->id ?>" title="Exportar" class="btn btn-success"
-                            > <i class="bi bi-arrows-expand-vertical"></i> </a> -->
+
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="9">Nº Registros: <?= $this->movimientos->rowCount() ?> </td>
+                    <td colspan="9">Nº Registros:
+                        <?= $this->movimientos->rowCount() ?>
+                    </td>
                 </tr>
             </tfoot>
 
@@ -70,4 +85,5 @@
     <!-- Bootstrap JS y popper -->
     <?php require_once "template/partials/javascript.php" ?>
 </body>
+
 </html>

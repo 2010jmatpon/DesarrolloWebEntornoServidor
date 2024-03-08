@@ -20,7 +20,7 @@
             <!-- nombre -->
             <div class="mb-3">
                 <label for="" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="nombre" value="<?= $this->cliente->nombre ?>">
+                <input type="text" class="form-control" name="nombre" value="<?= $this->cliente->nombre ?>" >
                 <!-- Mostrar posible error -->
                 <?php if (isset($this->errores['nombre'])): ?>
                     <span class="form-text text-danger" role="alert">

@@ -98,20 +98,15 @@ class Movimientos extends Controller
             $tipo = filter_var($_POST['tipo'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
             $cantidad = filter_var($_POST['cantidad'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
 
-            ######################
-            #OPTIMIZAR ESTA PARTE#
-            ######################
-
-            $cuenta = $this->model->getSaldo($id_cuenta);
+            $saldo = $this->model->getSaldo($id_cuenta);
+            if ($tipo == 'R' && $cantidad > $saldo) {
+                $errores['cantidad'] = 'El reintegro no puede ser superior a su saldo';
+            }
             if ($tipo == 'R') {
-
-                if ($cantidad > $cuenta) {
-                    $errores['cantidad'] = 'El reintegro no puede ser superior a su saldo';
-                }
                 $cantidad = "-" . $cantidad;
                 $cantidad = floatval($cantidad);
-
             }
+
 
             $saldo = filter_var($_POST['saldo'] ??= '', FILTER_SANITIZE_EMAIL);
 
@@ -148,9 +143,7 @@ class Movimientos extends Controller
             if (empty($cantidad)) {
                 $errores['cantidad'] = 'El campo cantidad es obligatorio';
             }
-            // if($tipo == 'R' && $cantidad > $saldo){
-            //     $errores['cantidad'] = 'El reintegro mo puede ser superior a su saldo';
-            // }
+
 
 
             if (!empty($errores)) {
@@ -162,6 +155,7 @@ class Movimientos extends Controller
                 header('location:' . URL . 'movimientos/new');
 
             } else {
+
                 $this->model->create($movimiento, $id_cuenta);
                 #Mensaje
                 $_SESSION['mensaje'] = "Movimiento creado    correctamente";
