@@ -1,0 +1,30 @@
+<?php 
+    class classUser{
+
+        public $id;
+        public $name;
+        public $email;
+        public $password;
+        public $password_confirm;
+        public $rol;
+
+        public function __construct(
+            $id = null, 
+            $name = null,
+            $email = null,
+            $password = null,
+            $password_confirm = null,
+            $rol = null,
+    ){
+            $this->id = $id;
+            $this->name = $name;
+            $this->email = $email;
+            $this->password = $password;
+            $this->password_confirm = $password_confirm;
+            $this->rol = $rol;
+    }
+
+  
+    }
+
+?>
