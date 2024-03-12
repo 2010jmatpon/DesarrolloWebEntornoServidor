@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\Course;
 
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class StudentController extends Controller
     {
         //Muestra los alumnos
         $alumnos = Student::all()->sortBy('id');
-        return view('student.home',['alumnos' => $alumnos]);
+        return view('student.home', ['alumnos' => $alumnos]);
 
     }
 
@@ -24,7 +25,9 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        //Carga formulario nuevo alumno
+        $cursos = Course::all()->sortBy('course');
+        return view('student.create', ['cursos' => $cursos]);
     }
 
     /**
@@ -32,7 +35,39 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Recibe los datos del formulario
+        //Valida los datos
+        //Almacena en la tabla student de la base de datos
+
+        //Validación Formulario
+        //Especifico en un array las reglas de validación de cada campo
+        $validateData = $request->validate(
+            [
+                'name' => ['required', 'string', 'max:35'],
+                'lastname' => ['required', 'string', 'max:50'],
+                'birth_date' => ['required', 'date'],
+                'phone' => ['required', 'max:13'],
+                'city' => ['required', 'string', 'max:40'],
+                'dni' => ['required', 'string', 'max:9', 'unique:students'],
+                'email' => ['required', 'string', 'max:40', 'unique:students'],
+                'course_id' => ['required', 'exists:courses,id'],
+            ]
+        );
+        //Cargamos los datos del formulario en la tabla courses
+        $alumno = Student::create(
+            [
+                'name' => $request['name'],
+                'lastname' => $request['lastname'],
+                'birth_date' => $request['birth_date'],
+                'phone' => $request['phone'],
+                'city' => $request['city'],
+                'dni' => $request['dni'],
+                'email' => $request['email'],
+                'course_id' => $request['course_id'],
+            ]
+        );
+        $alumno->save();
+        return redirect()->route('alumnos.index')->with('success', 'Alumno creado correctamente');
     }
 
     /**

@@ -9,6 +9,7 @@ Vista principal Alumnos --}}
 @section('contenido')
 {{-- Menu alumnos --}}
     @include('student.partials.menu')
+    @include('student.partials.alert')
     
     {{-- Lista de alumnos --}}
     <table class="table">
@@ -48,4 +49,5 @@ Vista principal Alumnos --}}
             @endforelse
         </tbody>
     </table>
+    <br><br><br>
 @endsection
