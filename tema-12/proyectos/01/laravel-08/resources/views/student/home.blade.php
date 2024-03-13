@@ -7,10 +7,10 @@ Vista principal Alumnos --}}
 @section('subtitulo', 'Panel Control Alumnos')
 
 @section('contenido')
-{{-- Menu alumnos --}}
+    {{-- Menu alumnos --}}
     @include('student.partials.menu')
     @include('student.partials.alert')
-    
+
     {{-- Lista de alumnos --}}
     <table class="table">
         <thead>
@@ -27,23 +27,29 @@ Vista principal Alumnos --}}
         </thead>
         <tbody>
             @forelse ($alumnos as $alumno)
-            <tr>
-                {{-- registro alumno --}}
-                <td scope="row">{{$alumno->id}}</td>
-                <td>{{$alumno->lastname}}</td>
-                <td>{{$alumno->name}}</td>
-                <td>{{$alumno->phone}}</td>
-                <td>{{$alumno->city}}</td>
-                <td>{{$alumno->email}}</td>
-                <td>{{$alumno->course->course}}</td>
+                <tr>
+                    {{-- registro alumno --}}
+                    <td scope="row">{{ $alumno->id }}</td>
+                    <td>{{ $alumno->lastname }}</td>
+                    <td>{{ $alumno->name }}</td>
+                    <td>{{ $alumno->phone }}</td>
+                    <td>{{ $alumno->city }}</td>
+                    <td>{{ $alumno->email }}</td>
+                    <td>{{ $alumno->course->course }}</td>
 
-                {{-- botones de accion --}}
-                <td style="display:flex; justify-content:space-between;">
-                    <a href="#" title="Editar" class="btn btn-primary"> <i class="bi bi-pencil"></i> </a>
-                    <a href="#" title="Mostrar" class="btn btn-warning"> <i class="bi bi-eye"></i> </a>
-                    <a href="#" title="Eliminar" onclick="return confirm('Confirmar eliminación Cuenta') " class="btn btn-danger"> <i class="bi bi-trash"></i> </a>
-                </td>
-            </tr>
+                    {{-- botones de accion --}}
+                    <td style="display:flex; justify-content:space-between;">
+                        <a href="{{ route('alumnos.edit', $alumno->id) }}" title="Editar" class="btn btn-primary"> <i
+                                class="bi bi-pencil"></i> </a>
+                        <a href="{{ route('alumnos.show', $alumno->id) }}" title="Mostrar" class="btn btn-warning"> <i class="bi bi-eye"></i> </a>
+                        <form style="display: inline" method="POST" action="{{ route('alumnos.destroy', $alumno->id) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('Confirmar eliminación Cuenta') "
+                                class="btn btn-danger"> <i class="bi bi-trash"></i> </button>
+                        </form>
+                    </td>
+                </tr>
             @empty
                 <p>No hay alumnos registrados</p>
             @endforelse
